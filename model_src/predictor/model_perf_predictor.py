@@ -118,9 +118,11 @@ def run_embedding_epoch(batch_fwd_func, model, loader, criterion, optimizer, boo
     total_loss, n_instances = 0., 0
     metrics_dict = collections.defaultdict(float)
     preds, targets = [], []
-    temperature = 0.1777*(1 - (curr_epoch/num_epochs) + 0.125)
+    temperature = 0.3*(1.05 - (curr_epoch/num_epochs))
+    if desc != "Train":
+        temperature = 0.05
     for batch in tqdm(loader, desc=desc, ascii=True):
-        embed = batch_fwd_func(model, batch)
+        embed, nd_embed, re_nd_embed = batch_fwd_func(model, batch)
         loss = SimCLRLoss(temperature)(embed, batch[DK_BATCH_EDGE_TSR_LIST])
         total_loss += loss.item() * batch[DK_BATCH_SIZE]
         if optimizer is not None:

@@ -25,7 +25,7 @@ def prepare_global_params():
     parser.add_argument("-device_str", type=str, required=False,
                         default=None)
     parser.add_argument("-seed", required=False, type=int,
-                        default=262)
+                        default=109)
     parser.add_argument("-max_gradient_norm", required=False, type=float,
                         default=5.0)
     parser.add_argument("-logs_dir", required=False, type=str,

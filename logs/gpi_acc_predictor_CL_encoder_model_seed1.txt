@@ -1,0 +1,3183 @@
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=32, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GraphConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+CGRegressor(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 56)
+    (weighted_embed_layer): Embedding(32, 46)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoder(
+    (gnn_layers): ModuleList(
+      (0): GraphConv(64, 64)
+      (1): GraphConv(64, 64)
+      (2): GraphConv(64, 64)
+      (3): GraphConv(64, 64)
+      (4): GraphConv(64, 64)
+      (5): GraphConv(64, 64)
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.1, inplace=False)
+    (init_ff): Linear(in_features=128, out_features=64, bias=True)
+  )
+  (aggregator): GraphAggregator(
+    (gnn_aggr_layer): PreEmbeddedGraphEncoder(
+      (gnn_layers): ModuleList(
+        (0): GraphConv(64, 64)
+      )
+      (dropout): Dropout(p=0.0, inplace=False)
+      (init_ff): Linear(in_features=128, out_features=64, bias=True)
+    )
+  )
+  (post_proj): Sequential(
+    (0): Linear(in_features=64, out_features=64, bias=True)
+    (1): Linear(in_features=64, out_features=64, bias=True)
+    (2): ReLU()
+    (3): Linear(in_features=64, out_features=64, bias=True)
+    (4): Linear(in_features=64, out_features=64, bias=True)
+  )
+  (regressor): Linear(in_features=64, out_features=1, bias=True)
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 94367
+Training for 40 epochs
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=32, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=32, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 56)
+    (weighted_embed_layer): Embedding(32, 46)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.1, inplace=False)
+    (init_ff): Linear(in_features=128, out_features=64, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=64, out_features=64, bias=True)
+      (key_layer): Linear(in_features=64, out_features=64, bias=True)
+      (value_layer): Linear(in_features=64, out_features=64, bias=True)
+      (output_layer): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (combination_layer): Linear(in_features=128, out_features=64, bias=True)
+  )
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 86430
+Training for 40 epochs
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=32, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 56)
+    (weighted_embed_layer): Embedding(32, 46)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.1, inplace=False)
+    (init_ff): Linear(in_features=128, out_features=64, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=64, out_features=64, bias=True)
+      (key_layer): Linear(in_features=64, out_features=64, bias=True)
+      (value_layer): Linear(in_features=64, out_features=64, bias=True)
+      (output_layer): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (combination_layer): Linear(in_features=128, out_features=64, bias=True)
+  )
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 86430
+Training for 40 epochs
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=32, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 56)
+    (weighted_embed_layer): Embedding(32, 46)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.1, inplace=False)
+    (init_ff): Linear(in_features=128, out_features=64, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=64, out_features=64, bias=True)
+      (key_layer): Linear(in_features=64, out_features=64, bias=True)
+      (value_layer): Linear(in_features=64, out_features=64, bias=True)
+      (output_layer): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (combination_layer): Linear(in_features=128, out_features=64, bias=True)
+  )
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 86430
+Training for 40 epochs
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=32, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 56)
+    (weighted_embed_layer): Embedding(32, 46)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.1, inplace=False)
+    (init_ff): Linear(in_features=128, out_features=64, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=64, out_features=64, bias=True)
+      (key_layer): Linear(in_features=64, out_features=64, bias=True)
+      (value_layer): Linear(in_features=64, out_features=64, bias=True)
+      (output_layer): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (combination_layer): Linear(in_features=128, out_features=64, bias=True)
+  )
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 86430
+Training for 40 epochs
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=32, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 56)
+    (weighted_embed_layer): Embedding(32, 46)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.1, inplace=False)
+    (init_ff): Linear(in_features=128, out_features=64, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=64, out_features=64, bias=True)
+      (key_layer): Linear(in_features=64, out_features=64, bias=True)
+      (value_layer): Linear(in_features=64, out_features=64, bias=True)
+      (output_layer): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (combination_layer): Linear(in_features=128, out_features=64, bias=True)
+  )
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 86430
+Training for 40 epochs
+Train epoch: 1, loss: -1971671806.1963391, elapsed time: 147.73976969718933
+Train score at epoch 1: -1971671806.1963391
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 1, loss: -2861855835.0272, elapsed time: 6.398250341415405
+Dev score at epoch 1: -2861855835.0272
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+curr_best_eval_perf: -2861855835.0272, curr_best_eval_iter: 1
+
+Train epoch: 2, loss: -56053498221.9632, elapsed time: 114.96494174003601
+Train score at epoch 2: -56053498221.9632
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 2, loss: -59914183259.9552, elapsed time: 6.3918328285217285
+Dev score at epoch 2: -59914183259.9552
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+curr_best_eval_perf: -59914183259.9552, curr_best_eval_iter: 2
+
+Train epoch: 3, loss: -892383292253.5936, elapsed time: 115.58759617805481
+Train score at epoch 3: -892383292253.5936
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 3, loss: -861124751564.8, elapsed time: 6.4037158489227295
+Dev score at epoch 3: -861124751564.8
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+curr_best_eval_perf: -861124751564.8, curr_best_eval_iter: 3
+
+Training interrupted
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=32, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 56)
+    (weighted_embed_layer): Embedding(32, 46)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.1, inplace=False)
+    (init_ff): Linear(in_features=128, out_features=64, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=64, out_features=64, bias=True)
+      (key_layer): Linear(in_features=64, out_features=64, bias=True)
+      (value_layer): Linear(in_features=64, out_features=64, bias=True)
+      (output_layer): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (combination_layer): Linear(in_features=128, out_features=64, bias=True)
+  )
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 86430
+Training for 40 epochs
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=32, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 56)
+    (weighted_embed_layer): Embedding(32, 46)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.1, inplace=False)
+    (init_ff): Linear(in_features=128, out_features=64, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=64, out_features=64, bias=True)
+      (key_layer): Linear(in_features=64, out_features=64, bias=True)
+      (value_layer): Linear(in_features=64, out_features=64, bias=True)
+      (output_layer): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (combination_layer): Linear(in_features=128, out_features=64, bias=True)
+  )
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 86430
+Training for 40 epochs
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=32, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 56)
+    (weighted_embed_layer): Embedding(32, 46)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.1, inplace=False)
+    (init_ff): Linear(in_features=128, out_features=64, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=64, out_features=64, bias=True)
+      (key_layer): Linear(in_features=64, out_features=64, bias=True)
+      (value_layer): Linear(in_features=64, out_features=64, bias=True)
+      (output_layer): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (combination_layer): Linear(in_features=128, out_features=64, bias=True)
+  )
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 86430
+Training for 40 epochs
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=32, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 56)
+    (weighted_embed_layer): Embedding(32, 46)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.1, inplace=False)
+    (init_ff): Linear(in_features=128, out_features=64, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=64, out_features=64, bias=True)
+      (key_layer): Linear(in_features=64, out_features=64, bias=True)
+      (value_layer): Linear(in_features=64, out_features=64, bias=True)
+      (output_layer): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (combination_layer): Linear(in_features=128, out_features=64, bias=True)
+  )
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 86430
+Training for 40 epochs
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=32, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 56)
+    (weighted_embed_layer): Embedding(32, 46)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.1, inplace=False)
+    (init_ff): Linear(in_features=128, out_features=64, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=64, out_features=64, bias=True)
+      (key_layer): Linear(in_features=64, out_features=64, bias=True)
+      (value_layer): Linear(in_features=64, out_features=64, bias=True)
+      (output_layer): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (combination_layer): Linear(in_features=128, out_features=64, bias=True)
+  )
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 86430
+Training for 40 epochs
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=32, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 56)
+    (weighted_embed_layer): Embedding(32, 46)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.1, inplace=False)
+    (init_ff): Linear(in_features=128, out_features=64, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=64, out_features=64, bias=True)
+      (key_layer): Linear(in_features=64, out_features=64, bias=True)
+      (value_layer): Linear(in_features=64, out_features=64, bias=True)
+      (output_layer): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (combination_layer): Linear(in_features=128, out_features=64, bias=True)
+  )
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 86430
+Training for 40 epochs
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=32, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 56)
+    (weighted_embed_layer): Embedding(32, 46)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.1, inplace=False)
+    (init_ff): Linear(in_features=128, out_features=64, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=64, out_features=64, bias=True)
+      (key_layer): Linear(in_features=64, out_features=64, bias=True)
+      (value_layer): Linear(in_features=64, out_features=64, bias=True)
+      (output_layer): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (combination_layer): Linear(in_features=128, out_features=64, bias=True)
+  )
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 86430
+Training for 40 epochs
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=32, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 56)
+    (weighted_embed_layer): Embedding(32, 46)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.1, inplace=False)
+    (init_ff): Linear(in_features=128, out_features=64, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=64, out_features=64, bias=True)
+      (key_layer): Linear(in_features=64, out_features=64, bias=True)
+      (value_layer): Linear(in_features=64, out_features=64, bias=True)
+      (output_layer): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (combination_layer): Linear(in_features=128, out_features=64, bias=True)
+  )
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 86430
+Training for 40 epochs
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=32, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=32, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=32, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=32, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 56)
+    (weighted_embed_layer): Embedding(32, 46)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.1, inplace=False)
+    (init_ff): Linear(in_features=128, out_features=64, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=64, out_features=64, bias=True)
+      (key_layer): Linear(in_features=64, out_features=64, bias=True)
+      (value_layer): Linear(in_features=64, out_features=64, bias=True)
+      (output_layer): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (combination_layer): Linear(in_features=128, out_features=64, bias=True)
+  )
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 86430
+Training for 40 epochs
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=32, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 56)
+    (weighted_embed_layer): Embedding(32, 46)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.1, inplace=False)
+    (init_ff): Linear(in_features=128, out_features=64, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=64, out_features=64, bias=True)
+      (key_layer): Linear(in_features=64, out_features=64, bias=True)
+      (value_layer): Linear(in_features=64, out_features=64, bias=True)
+      (output_layer): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (combination_layer): Linear(in_features=128, out_features=64, bias=True)
+  )
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 86430
+Training for 40 epochs
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=32, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 56)
+    (weighted_embed_layer): Embedding(32, 46)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.1, inplace=False)
+    (init_ff): Linear(in_features=128, out_features=64, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=64, out_features=64, bias=True)
+      (key_layer): Linear(in_features=64, out_features=64, bias=True)
+      (value_layer): Linear(in_features=64, out_features=64, bias=True)
+      (output_layer): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (combination_layer): Linear(in_features=128, out_features=64, bias=True)
+  )
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 86430
+Training for 40 epochs
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=32, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=32, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 56)
+    (weighted_embed_layer): Embedding(32, 46)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.1, inplace=False)
+    (init_ff): Linear(in_features=128, out_features=64, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=64, out_features=64, bias=True)
+      (key_layer): Linear(in_features=64, out_features=64, bias=True)
+      (value_layer): Linear(in_features=64, out_features=64, bias=True)
+      (output_layer): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (combination_layer): Linear(in_features=128, out_features=64, bias=True)
+  )
+  (projection_layer): Linear(in_features=64, out_features=32, bias=True)
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 88510
+Training for 40 epochs
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=32, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 56)
+    (weighted_embed_layer): Embedding(32, 46)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.1, inplace=False)
+    (init_ff): Linear(in_features=128, out_features=64, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=64, out_features=64, bias=True)
+      (key_layer): Linear(in_features=64, out_features=64, bias=True)
+      (value_layer): Linear(in_features=64, out_features=64, bias=True)
+      (output_layer): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (combination_layer): Linear(in_features=128, out_features=64, bias=True)
+  )
+  (projection_layer): Linear(in_features=128, out_features=32, bias=True)
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 90558
+Training for 40 epochs
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=32, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 56)
+    (weighted_embed_layer): Embedding(32, 46)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.1, inplace=False)
+    (init_ff): Linear(in_features=128, out_features=64, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=64, out_features=64, bias=True)
+      (key_layer): Linear(in_features=64, out_features=64, bias=True)
+      (value_layer): Linear(in_features=64, out_features=64, bias=True)
+      (output_layer): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (combination_layer): Linear(in_features=128, out_features=64, bias=True)
+  )
+  (projection_layer): Linear(in_features=128, out_features=32, bias=True)
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 90558
+Training for 40 epochs
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=32, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 56)
+    (weighted_embed_layer): Embedding(32, 46)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.1, inplace=False)
+    (init_ff): Linear(in_features=128, out_features=64, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=64, out_features=64, bias=True)
+      (key_layer): Linear(in_features=64, out_features=64, bias=True)
+      (value_layer): Linear(in_features=64, out_features=64, bias=True)
+      (output_layer): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (combination_layer): Linear(in_features=128, out_features=64, bias=True)
+  )
+  (projection_layer): Linear(in_features=64, out_features=32, bias=False)
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 88478
+Training for 40 epochs
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=32, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 56)
+    (weighted_embed_layer): Embedding(32, 46)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.1, inplace=False)
+    (init_ff): Linear(in_features=128, out_features=64, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=64, out_features=64, bias=True)
+      (key_layer): Linear(in_features=64, out_features=64, bias=True)
+      (value_layer): Linear(in_features=64, out_features=64, bias=True)
+      (output_layer): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (combination_layer): Linear(in_features=128, out_features=64, bias=True)
+  )
+  (projection_layer): Linear(in_features=128, out_features=32, bias=False)
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 90526
+Training for 40 epochs
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=16, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 56)
+    (weighted_embed_layer): Embedding(32, 46)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.1, inplace=False)
+    (init_ff): Linear(in_features=128, out_features=64, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=64, out_features=64, bias=True)
+      (key_layer): Linear(in_features=64, out_features=64, bias=True)
+      (value_layer): Linear(in_features=64, out_features=64, bias=True)
+      (output_layer): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (combination_layer): Linear(in_features=128, out_features=64, bias=True)
+  )
+  (projection_layer): Linear(in_features=128, out_features=32, bias=False)
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 90526
+Training for 40 epochs
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=16, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 56)
+    (weighted_embed_layer): Embedding(32, 46)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.1, inplace=False)
+    (init_ff): Linear(in_features=128, out_features=64, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=64, out_features=64, bias=True)
+      (key_layer): Linear(in_features=64, out_features=64, bias=True)
+      (value_layer): Linear(in_features=64, out_features=64, bias=True)
+      (output_layer): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (combination_layer): Linear(in_features=128, out_features=64, bias=True)
+  )
+  (projection_layer): Linear(in_features=128, out_features=32, bias=False)
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 90526
+Training for 40 epochs
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=16, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 56)
+    (weighted_embed_layer): Embedding(32, 46)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.1, inplace=False)
+    (init_ff): Linear(in_features=128, out_features=64, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=64, out_features=64, bias=True)
+      (key_layer): Linear(in_features=64, out_features=64, bias=True)
+      (value_layer): Linear(in_features=64, out_features=64, bias=True)
+      (output_layer): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (combination_layer): Linear(in_features=128, out_features=64, bias=True)
+  )
+  (projection_layer): Linear(in_features=128, out_features=32, bias=False)
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 90526
+Training for 40 epochs
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=16, initial_lr=0.0001, in_channels=64, hidden_size=64, out_channels=64, num_layers=6, dropout_prob=0.1, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 56)
+    (weighted_embed_layer): Embedding(32, 46)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.1, inplace=False)
+    (init_ff): Linear(in_features=128, out_features=64, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=64, out_features=64, bias=True)
+      (key_layer): Linear(in_features=64, out_features=64, bias=True)
+      (value_layer): Linear(in_features=64, out_features=64, bias=True)
+      (output_layer): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (combination_layer): Linear(in_features=128, out_features=64, bias=True)
+  )
+  (projection_layer): Linear(in_features=128, out_features=32, bias=False)
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 90526
+Training for 40 epochs
+Train epoch: 1, loss: -0.06319745798259974, elapsed time: 578.2218689918518
+Train score at epoch 1: -0.06319745798259974
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 1, loss: -0.0679944218635559, elapsed time: 25.371973752975464
+Dev score at epoch 1: -0.0679944218635559
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+curr_best_eval_perf: -0.0679944218635559, curr_best_eval_iter: 1
+
+Train epoch: 2, loss: -0.06329346985220909, elapsed time: 248.81298279762268
+Train score at epoch 2: -0.06329346985220909
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 2, loss: -0.06799766632318496, elapsed time: 25.218384981155396
+Dev score at epoch 2: -0.06799766632318496
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+curr_best_eval_perf: -0.06799766632318496, curr_best_eval_iter: 2
+
+Train epoch: 3, loss: -0.06329685921967029, elapsed time: 248.98563194274902
+Train score at epoch 3: -0.06329685921967029
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 3, loss: -0.06799791316986084, elapsed time: 25.101800680160522
+Dev score at epoch 3: -0.06799791316986084
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+curr_best_eval_perf: -0.06799791316986084, curr_best_eval_iter: 3
+
+Training interrupted
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=40, fine_tune_epochs=100, batch_size=16, initial_lr=0.001, in_channels=128, hidden_size=128, out_channels=128, num_layers=6, dropout_prob=0.15, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 120)
+    (weighted_embed_layer): Embedding(32, 110)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.15, inplace=False)
+    (init_ff): Linear(in_features=256, out_features=128, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=128, out_features=128, bias=True)
+      (key_layer): Linear(in_features=128, out_features=128, bias=True)
+      (value_layer): Linear(in_features=128, out_features=128, bias=True)
+      (output_layer): Linear(in_features=128, out_features=128, bias=True)
+    )
+    (combination_layer): Linear(in_features=256, out_features=128, bias=True)
+  )
+  (projection_layer): Linear(in_features=256, out_features=32, bias=False)
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 345630
+Training for 40 epochs
+Train epoch: 1, loss: -0.06266245746016502, elapsed time: 233.0687279701233
+Train score at epoch 1: -0.06266245746016502
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 1, loss: -0.0679998343706131, elapsed time: 22.601754426956177
+Dev score at epoch 1: -0.0679998343706131
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+curr_best_eval_perf: -0.0679998343706131, curr_best_eval_iter: 1
+
+Train epoch: 2, loss: -0.06265658507496119, elapsed time: 231.39003229141235
+Train score at epoch 2: -0.06265658507496119
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 2, loss: -0.06799987496137619, elapsed time: 22.645339488983154
+Dev score at epoch 2: -0.06799987496137619
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+curr_best_eval_perf: -0.06799987496137619, curr_best_eval_iter: 2
+
+Training interrupted
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=60, fine_tune_epochs=100, batch_size=128, initial_lr=0.001, in_channels=128, hidden_size=128, out_channels=128, num_layers=6, dropout_prob=0.15, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 120)
+    (weighted_embed_layer): Embedding(32, 110)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.15, inplace=False)
+    (init_ff): Linear(in_features=256, out_features=128, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=128, out_features=128, bias=True)
+      (key_layer): Linear(in_features=128, out_features=128, bias=True)
+      (value_layer): Linear(in_features=128, out_features=128, bias=True)
+      (output_layer): Linear(in_features=128, out_features=128, bias=True)
+    )
+    (combination_layer): Linear(in_features=256, out_features=128, bias=True)
+  )
+  (projection_layer): Linear(in_features=256, out_features=32, bias=False)
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 345630
+Training for 60 epochs
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=60, fine_tune_epochs=100, batch_size=64, initial_lr=0.001, in_channels=128, hidden_size=128, out_channels=128, num_layers=6, dropout_prob=0.15, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 120)
+    (weighted_embed_layer): Embedding(32, 110)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.15, inplace=False)
+    (init_ff): Linear(in_features=256, out_features=128, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=128, out_features=128, bias=True)
+      (key_layer): Linear(in_features=128, out_features=128, bias=True)
+      (value_layer): Linear(in_features=128, out_features=128, bias=True)
+      (output_layer): Linear(in_features=128, out_features=128, bias=True)
+    )
+    (combination_layer): Linear(in_features=256, out_features=128, bias=True)
+  )
+  (projection_layer): Linear(in_features=256, out_features=32, bias=False)
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 345630
+Training for 60 epochs
+Train epoch: 1, loss: -0.016479897470772265, elapsed time: 379.61194014549255
+Train score at epoch 1: -0.016479897470772265
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 1, loss: -0.022191502952575683, elapsed time: 27.354246139526367
+Dev score at epoch 1: -0.022191502952575683
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+curr_best_eval_perf: -0.022191502952575683, curr_best_eval_iter: 1
+
+Train epoch: 2, loss: -0.016519088493287565, elapsed time: 392.20179271698
+Train score at epoch 2: -0.016519088493287565
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 2, loss: -0.022196204686164855, elapsed time: 27.643414735794067
+Dev score at epoch 2: -0.022196204686164855
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+curr_best_eval_perf: -0.022196204686164855, curr_best_eval_iter: 2
+
+Train epoch: 3, loss: -0.016522070716321467, elapsed time: 392.69647336006165
+Train score at epoch 3: -0.016522070716321467
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 3, loss: -0.022199360525608062, elapsed time: 27.545047998428345
+Dev score at epoch 3: -0.022199360525608062
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+curr_best_eval_perf: -0.022199360525608062, curr_best_eval_iter: 3
+
+Train epoch: 4, loss: -0.01652270051240921, elapsed time: 393.21049785614014
+Train score at epoch 4: -0.01652270051240921
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 4, loss: -0.022197611784934998, elapsed time: 27.550493240356445
+Dev score at epoch 4: -0.022197611784934998
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+curr_best_eval_perf: -0.022199360525608062, curr_best_eval_iter: 3
+
+Training interrupted
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=60, fine_tune_epochs=100, batch_size=64, initial_lr=0.0001, in_channels=128, hidden_size=128, out_channels=128, num_layers=6, dropout_prob=0.15, aggr_method='mean', gnn_activ='tanh', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 120)
+    (weighted_embed_layer): Embedding(32, 110)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+    )
+    (activ): Tanh()
+    (dropout): Dropout(p=0.15, inplace=False)
+    (init_ff): Linear(in_features=256, out_features=128, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=128, out_features=128, bias=True)
+      (key_layer): Linear(in_features=128, out_features=128, bias=True)
+      (value_layer): Linear(in_features=128, out_features=128, bias=True)
+      (output_layer): Linear(in_features=128, out_features=128, bias=True)
+    )
+    (combination_layer): Linear(in_features=256, out_features=128, bias=True)
+  )
+  (projection_layer): Linear(in_features=256, out_features=32, bias=False)
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 345630
+Training for 60 epochs
+Train epoch: 1, loss: -0.9950530963853002, elapsed time: 386.9173409938812, temperature: 0.19695083333333335
+Train score at epoch 1: -0.9950530963853002
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 1, loss: -0.9997219789862632, elapsed time: 27.568761825561523, temperature: 0.19547
+Dev score at epoch 1: -0.9997219789862632
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+curr_best_eval_perf: -0.9997219789862632, curr_best_eval_iter: 1
+
+Train epoch: 2, loss: -0.9991850597575307, elapsed time: 394.29905557632446, temperature: 0.19398916666666668
+Train score at epoch 2: -0.9991850597575307
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 2, loss: -0.9998610730409622, elapsed time: 27.50788974761963, temperature: 0.1910275
+Dev score at epoch 2: -0.9998610730409622
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+curr_best_eval_perf: -0.9998610730409622, curr_best_eval_iter: 2
+
+Train epoch: 3, loss: -0.9992359175264836, elapsed time: 394.2060694694519, temperature: 0.1910275
+Train score at epoch 3: -0.9992359175264836
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 3, loss: -0.9998941865444183, elapsed time: 27.440422773361206, temperature: 0.186585
+Dev score at epoch 3: -0.9998941865444183
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+curr_best_eval_perf: -0.9998941865444183, curr_best_eval_iter: 3
+
+Train epoch: 4, loss: -0.9993456859841943, elapsed time: 394.59554147720337, temperature: 0.18806583333333332
+Train score at epoch 4: -0.9993456859841943
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 4, loss: -0.9998470137119293, elapsed time: 27.57881736755371, temperature: 0.18214249999999998
+Dev score at epoch 4: -0.9998470137119293
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+curr_best_eval_perf: -0.9998941865444183, curr_best_eval_iter: 3
+
+Training interrupted
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=60, fine_tune_epochs=100, batch_size=64, initial_lr=0.0001, in_channels=128, hidden_size=128, out_channels=128, num_layers=6, dropout_prob=0.2, aggr_method='mean', gnn_activ='relu', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 120)
+    (weighted_embed_layer): Embedding(32, 110)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+    )
+    (activ): ReLU()
+    (dropout): Dropout(p=0.2, inplace=False)
+    (init_ff): Linear(in_features=256, out_features=128, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=128, out_features=128, bias=True)
+      (key_layer): Linear(in_features=128, out_features=128, bias=True)
+      (value_layer): Linear(in_features=128, out_features=128, bias=True)
+      (output_layer): Linear(in_features=128, out_features=128, bias=True)
+    )
+    (combination_layer): Linear(in_features=256, out_features=128, bias=True)
+  )
+  (projection_layer): Linear(in_features=256, out_features=32, bias=False)
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 345630
+Training for 60 epochs
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=60, fine_tune_epochs=100, batch_size=64, initial_lr=0.0001, in_channels=128, hidden_size=128, out_channels=128, num_layers=6, dropout_prob=0.2, aggr_method='mean', gnn_activ='relu', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 120)
+    (weighted_embed_layer): Embedding(32, 110)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+    )
+    (activ): ReLU()
+    (dropout): Dropout(p=0.2, inplace=False)
+    (init_ff): Linear(in_features=256, out_features=128, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=128, out_features=128, bias=True)
+      (key_layer): Linear(in_features=128, out_features=128, bias=True)
+      (value_layer): Linear(in_features=128, out_features=128, bias=True)
+      (output_layer): Linear(in_features=128, out_features=128, bias=True)
+    )
+    (combination_layer): Linear(in_features=256, out_features=128, bias=True)
+  )
+  (projection_layer): Linear(in_features=256, out_features=32, bias=False)
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 345630
+Training for 60 epochs
+Train epoch: 1, loss: -0.9801441399037838, elapsed time: 394.28480219841003, temperature: 0.19695083333333335
+Train score at epoch 1: -0.9801441399037838
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 1, loss: -0.9963810364603997, elapsed time: 28.475322484970093, temperature: 0.19547
+Dev score at epoch 1: -0.9963810364603997
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+curr_best_eval_perf: -0.9963810364603997, curr_best_eval_iter: 1
+
+Training interrupted
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=60, fine_tune_epochs=100, batch_size=64, initial_lr=0.0001, in_channels=128, hidden_size=128, out_channels=128, num_layers=6, dropout_prob=0.2, aggr_method='mean', gnn_activ='relu', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 120)
+    (weighted_embed_layer): Embedding(32, 110)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+    )
+    (activ): ReLU()
+    (dropout): Dropout(p=0.2, inplace=False)
+    (init_ff): Linear(in_features=256, out_features=128, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=128, out_features=128, bias=True)
+      (key_layer): Linear(in_features=128, out_features=128, bias=True)
+      (value_layer): Linear(in_features=128, out_features=128, bias=True)
+      (output_layer): Linear(in_features=128, out_features=128, bias=True)
+    )
+    (combination_layer): Linear(in_features=256, out_features=128, bias=True)
+  )
+  (projection_layer): Linear(in_features=256, out_features=64, bias=False)
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 353822
+Training for 60 epochs
+Train epoch: 1, loss: -0.9821116151571274, elapsed time: 398.39732098579407, temperature: 0.19695083333333335
+Train score at epoch 1: -0.9821116151571274
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 1, loss: -0.9970594771027566, elapsed time: 28.427115201950073, temperature: 0.19547
+Dev score at epoch 1: -0.9970594771027566
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+curr_best_eval_perf: -0.9970594771027566, curr_best_eval_iter: 1
+
+Training interrupted
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=60, fine_tune_epochs=100, batch_size=64, initial_lr=0.0001, in_channels=128, hidden_size=128, out_channels=128, num_layers=6, dropout_prob=0.35, aggr_method='mean', gnn_activ='relu', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 120)
+    (weighted_embed_layer): Embedding(32, 110)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+    )
+    (activ): ReLU()
+    (dropout): Dropout(p=0.35, inplace=False)
+    (dropout_attn): Dropout(p=0.175, inplace=False)
+    (init_ff): Linear(in_features=256, out_features=128, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=128, out_features=128, bias=True)
+      (key_layer): Linear(in_features=128, out_features=128, bias=True)
+      (value_layer): Linear(in_features=128, out_features=128, bias=True)
+      (output_layer): Linear(in_features=128, out_features=128, bias=True)
+    )
+    (combination_layer): Linear(in_features=256, out_features=128, bias=True)
+  )
+  (projection_layer): Linear(in_features=256, out_features=64, bias=False)
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 353822
+Training for 60 epochs
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=60, fine_tune_epochs=100, batch_size=64, initial_lr=0.0001, in_channels=128, hidden_size=128, out_channels=128, num_layers=6, dropout_prob=0.35, aggr_method='mean', gnn_activ='relu', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_encoder_model_seed1
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 120)
+    (weighted_embed_layer): Embedding(32, 110)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+    )
+    (activ): ReLU()
+    (dropout): Dropout(p=0.35, inplace=False)
+    (dropout_attn): Dropout(p=0.175, inplace=False)
+    (init_ff): Linear(in_features=256, out_features=128, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=128, out_features=128, bias=True)
+      (key_layer): Linear(in_features=128, out_features=128, bias=True)
+      (value_layer): Linear(in_features=128, out_features=128, bias=True)
+      (output_layer): Linear(in_features=128, out_features=128, bias=True)
+    )
+    (combination_layer): Linear(in_features=256, out_features=128, bias=True)
+  )
+  (projection_layer): Linear(in_features=256, out_features=64, bias=False)
+)
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Number of trainable parameters: 353822
+Training for 60 epochs
+Train epoch: 1, loss: -0.9744601532295346, elapsed time: 398.18411803245544, temperature: 0.19695083333333335
+Train score at epoch 1: -0.9744601532295346
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 1, loss: -0.9964266583681106, elapsed time: 28.871706247329712, temperature: 0.19547
+Dev score at epoch 1: -0.9964266583681106
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+curr_best_eval_perf: -0.9964266583681106, curr_best_eval_iter: 1
+
+Train epoch: 2, loss: -0.9849144173666835, elapsed time: 405.9398765563965, temperature: 0.19398916666666668
+Train score at epoch 2: -0.9849144173666835
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 2, loss: -0.9957882618188858, elapsed time: 28.518295288085938, temperature: 0.1910275
+Dev score at epoch 2: -0.9957882618188858
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+curr_best_eval_perf: -0.9964266583681106, curr_best_eval_iter: 1
+
+Train epoch: 3, loss: -0.9862239035919309, elapsed time: 405.94383907318115, temperature: 0.1910275
+Train score at epoch 3: -0.9862239035919309
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 3, loss: -0.9983715261220932, elapsed time: 28.405953645706177, temperature: 0.186585
+Dev score at epoch 3: -0.9983715261220932
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+curr_best_eval_perf: -0.9983715261220932, curr_best_eval_iter: 3
+
+Train epoch: 4, loss: -0.9867591319143773, elapsed time: 405.58326148986816, temperature: 0.18806583333333332
+Train score at epoch 4: -0.9867591319143773
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 4, loss: -0.9991405574679375, elapsed time: 28.489107608795166, temperature: 0.18214249999999998
+Dev score at epoch 4: -0.9991405574679375
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+curr_best_eval_perf: -0.9991405574679375, curr_best_eval_iter: 4
+
+Train epoch: 5, loss: -0.987253477215767, elapsed time: 406.0420718193054, temperature: 0.18510416666666663
+Train score at epoch 5: -0.987253477215767
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 5, loss: -0.9991406949877739, elapsed time: 28.531399965286255, temperature: 0.1777
+Dev score at epoch 5: -0.9991406949877739
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+curr_best_eval_perf: -0.9991406949877739, curr_best_eval_iter: 5
+
+Train epoch: 6, loss: -0.9873297521814703, elapsed time: 406.15482568740845, temperature: 0.18214249999999998
+Train score at epoch 6: -0.9873297521814703
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 6, loss: -0.9988550183534622, elapsed time: 28.503424406051636, temperature: 0.17325749999999998
+Dev score at epoch 6: -0.9988550183534622
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+curr_best_eval_perf: -0.9991406949877739, curr_best_eval_iter: 5
+
+Train epoch: 7, loss: -0.9874286948010326, elapsed time: 405.8849747180939, temperature: 0.17918083333333332
+Train score at epoch 7: -0.9874286948010326
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 7, loss: -0.9996279848337174, elapsed time: 28.502291917800903, temperature: 0.168815
+Dev score at epoch 7: -0.9996279848337174
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_encoder_model_seed1_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+curr_best_eval_perf: -0.9996279848337174, curr_best_eval_iter: 7
+
+Training interrupted
+Model name: gpi_acc_predictor_CL_encoder_model_seed1
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=1, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_encoder_model_seed1', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=60, fine_tune_epochs=100, batch_size=64, initial_lr=0.0001, in_channels=128, hidden_size=128, out_channels=128, num_layers=6, dropout_prob=0.4, aggr_method='mean', gnn_activ='relu', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 1
+My cuda seed is 1
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...

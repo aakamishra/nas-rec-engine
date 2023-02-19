@@ -123,12 +123,15 @@ class GraphAutoEncoder(torch.nn.Module):
         node_embedding = self.embed_layer(regular_node_inds, regular_node_shapes,
                                           weighted_node_inds, weighted_node_shapes,
                                           weighted_node_kernels, weighted_node_bias)
-        batch_embedding1 = self.projection_layer(self.encoder(node_embedding, edge_tsr_list, batch_last_node_idx_list))
+        
+        encoder_output = self.encoder(node_embedding, edge_tsr_list, batch_last_node_idx_list)
+        
+        batch_embedding1 = self.projection_layer(encoder_output)
         
         batch_embedding2 = self.projection_layer(self.encoder(node_embedding, edge_tsr_list, batch_last_node_idx_list))
-                
+                        
         return torch.cat([batch_embedding1, batch_embedding2], dim=0)
-        
+    
 def make_embedding_model(n_unique_labels, out_embed_size,
                       shape_embed_size, kernel_embed_size,
                       n_unique_kernels, n_shape_vals,
@@ -136,13 +139,72 @@ def make_embedding_model(n_unique_labels, out_embed_size,
                       bias_embed_size=2, gnn_activ=torch.nn.ReLU(),
                       n_gnn_layers=4, dropout_prob=0.0,
                       regressor_activ=None, aggr_method="mean"):
-    from model_src.model_components import PreEmbeddedGraphEncoder, PreEmbeddedGraphDecoder, PreEmbeddedGraphEncoderWithAttention
+    from model_src.model_components import PreEmbeddedGraphEncoderWithAttention
     embed_layer = CGNodeEmbedding(n_unique_labels, out_embed_size, shape_embed_size, kernel_embed_size,
                                   bias_embed_size, n_unique_kernels, n_shape_vals)
     encoder = PreEmbeddedGraphEncoderWithAttention(out_embed_size, hidden_size, out_channels, gnn_constructor,
                                       gnn_activ, n_gnn_layers, dropout_prob)    
+    # decoder = TransformerDecoder(output_size=out_embed_size, 
+    #                              hidden_size=2*hidden_size, 
+    #                              num_layers=3, 
+    #                              num_heads=4, 
+    #                              dropout=0.2)
     return GraphAutoEncoder(embed_layer, encoder)
+
+
+class AggregateCGRegressor(torch.nn.Module):
+
+    def __init__(self, graph_encoder, aggregator, hidden_size,
+                 activ=None, ext_feat_size=0):
+        super(AggregateCGRegressor, self).__init__()
+        self.graph_encoder = graph_encoder
+        self.aggregator = aggregator
+        self.activ = activ
+        self.post_proj = torch.nn.Sequential(
+            torch.nn.Linear(hidden_size, hidden_size),
+            torch.nn.Linear(hidden_size, 2*hidden_size),
+            torch.nn.ReLU(),
+            torch.nn.Linear(2*hidden_size, hidden_size),
+            torch.nn.ReLU(),
+            torch.nn.Linear(hidden_size, hidden_size),
+        )
+        self.regressor = torch.nn.Linear(hidden_size + ext_feat_size, 1)
+
+    def forward(self, regular_node_inds, regular_node_shapes,
+                weighted_node_inds, weighted_node_shapes, weighted_node_kernels, weighted_node_bias,
+                edge_tsr_list, batch_last_node_idx_list, index=None,
+                ext_feat=None):
+        node_embedding = self.graph_encoder.embed_layer(regular_node_inds, regular_node_shapes,
+                                          weighted_node_inds, weighted_node_shapes,
+                                          weighted_node_kernels, weighted_node_bias)
+        batch_embedding = self.graph_encoder.encoder(node_embedding, edge_tsr_list, batch_last_node_idx_list)
+        
+        graph_embedding = self.aggregator(batch_embedding, batch_last_node_idx_list, index=index)
+        graph_embedding = self.post_proj(graph_embedding)
+        if self.activ is not None:
+            graph_embedding = self.activ(graph_embedding)
+        if ext_feat is not None:
+            ext_feat = ext_feat.to(device())
+            graph_embedding = torch.cat([graph_embedding, ext_feat], dim=-1)
+        out = self.regressor(graph_embedding)
+        return out
     
+def make_embedding_regressor_model(n_unique_labels, out_embed_size,
+                      shape_embed_size, kernel_embed_size,
+                      n_unique_kernels, n_shape_vals,
+                      hidden_size, out_channels, gnn_constructor,
+                      bias_embed_size=2, gnn_activ=torch.nn.ReLU(),
+                      n_gnn_layers=4, dropout_prob=0.0,
+                      regressor_activ=None, aggr_method="mean"):
+    from model_src.model_components import PreEmbeddedGraphEncoderWithAttention
     
+    embed_layer = CGNodeEmbedding(n_unique_labels, out_embed_size, shape_embed_size, kernel_embed_size,
+                                  bias_embed_size, n_unique_kernels, n_shape_vals)
+    encoder = PreEmbeddedGraphEncoderWithAttention(out_embed_size, hidden_size, out_channels, gnn_constructor,
+                                      gnn_activ, n_gnn_layers, dropout_prob)   
     
+    graph_encoder = GraphAutoEncoder(embed_layer, encoder)
     
+    aggregator = GraphAggregator(2*hidden_size, aggr_method=aggr_method)
+    
+    return AggregateCGRegressor(graph_encoder, aggregator, 2*hidden_size, activ=regressor_activ)

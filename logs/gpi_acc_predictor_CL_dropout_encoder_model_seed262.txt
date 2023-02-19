@@ -1,0 +1,1085 @@
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=262, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_dropout_encoder_model_seed262', family_train='nb101', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=60, fine_tune_epochs=100, batch_size=64, initial_lr=0.0001, in_channels=128, hidden_size=128, out_channels=128, num_layers=6, dropout_prob=0.4, aggr_method='mean', gnn_activ='relu', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 262
+My cuda seed is 262
+Train Families: ['nb101']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['nb101']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8968612016542681
+Train size: 40000
+Dev size: 5000
+Test size: 5000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 190.43892
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_dropout_encoder_model_seed262
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 120)
+    (weighted_embed_layer): Embedding(32, 110)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+    )
+    (activ): ReLU()
+    (dropout): Dropout(p=0.4, inplace=False)
+    (dropout_attn): Dropout(p=0.2, inplace=False)
+    (init_ff): Linear(in_features=256, out_features=128, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=128, out_features=128, bias=True)
+      (key_layer): Linear(in_features=128, out_features=128, bias=True)
+      (value_layer): Linear(in_features=128, out_features=128, bias=True)
+      (output_layer): Linear(in_features=128, out_features=128, bias=True)
+    )
+    (combination_layer): Linear(in_features=256, out_features=128, bias=True)
+  )
+  (projection_layer): Linear(in_features=256, out_features=64, bias=False)
+)
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+Number of trainable parameters: 353822
+Training for 60 epochs
+Train epoch: 1, loss: -0.9731976670190692, elapsed time: 385.8278396129608, temperature: 0.19695083333333335
+Train score at epoch 1: -0.9731976670190692
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 1, loss: -0.9968505407094955, elapsed time: 27.901228427886963, temperature: 0.19547
+Dev score at epoch 1: -0.9968505407094955
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9968505407094955, curr_best_eval_iter: 1
+
+Train epoch: 2, loss: -0.984271917976439, elapsed time: 388.059796333313, temperature: 0.19398916666666668
+Train score at epoch 2: -0.984271917976439
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 2, loss: -0.998383966076374, elapsed time: 28.23304009437561, temperature: 0.1910275
+Dev score at epoch 2: -0.998383966076374
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.998383966076374, curr_best_eval_iter: 2
+
+Train epoch: 3, loss: -0.985343524825573, elapsed time: 390.12903690338135, temperature: 0.1910275
+Train score at epoch 3: -0.985343524825573
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 3, loss: -0.9983795288324356, elapsed time: 28.20955991744995, temperature: 0.186585
+Dev score at epoch 3: -0.9983795288324356
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.998383966076374, curr_best_eval_iter: 2
+
+Train epoch: 4, loss: -0.9859620850205422, elapsed time: 390.301869392395, temperature: 0.18806583333333332
+Train score at epoch 4: -0.9859620850205422
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 4, loss: -0.9990962309837341, elapsed time: 28.22689938545227, temperature: 0.18214249999999998
+Dev score at epoch 4: -0.9990962309837341
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9990962309837341, curr_best_eval_iter: 4
+
+Train epoch: 5, loss: -0.9863264156490564, elapsed time: 390.8304135799408, temperature: 0.18510416666666663
+Train score at epoch 5: -0.9863264156490564
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 5, loss: -0.9988970918655395, elapsed time: 28.215773344039917, temperature: 0.1777
+Dev score at epoch 5: -0.9988970918655395
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9990962309837341, curr_best_eval_iter: 4
+
+Train epoch: 6, loss: -0.9865607390776276, elapsed time: 390.2333333492279, temperature: 0.18214249999999998
+Train score at epoch 6: -0.9865607390776276
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 6, loss: -0.9990918394207955, elapsed time: 28.20699691772461, temperature: 0.17325749999999998
+Dev score at epoch 6: -0.9990918394207955
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9990962309837341, curr_best_eval_iter: 4
+
+Train epoch: 7, loss: -0.9865015428617596, elapsed time: 389.82639479637146, temperature: 0.17918083333333332
+Train score at epoch 7: -0.9865015428617596
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 7, loss: -0.9991044275164604, elapsed time: 27.879337787628174, temperature: 0.168815
+Dev score at epoch 7: -0.9991044275164604
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9991044275164604, curr_best_eval_iter: 7
+
+Train epoch: 8, loss: -0.9867074740096927, elapsed time: 1510.3162944316864, temperature: 0.17621916666666668
+Train score at epoch 8: -0.9867074740096927
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 8, loss: -0.9981465585589409, elapsed time: 28.31486749649048, temperature: 0.1643725
+Dev score at epoch 8: -0.9981465585589409
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9991044275164604, curr_best_eval_iter: 7
+
+Train epoch: 9, loss: -0.9868628312259913, elapsed time: 390.45109820365906, temperature: 0.17325749999999998
+Train score at epoch 9: -0.9868628312259913
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 9, loss: -0.9996331724405288, elapsed time: 28.135969877243042, temperature: 0.15993
+Dev score at epoch 9: -0.9996331724405288
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9996331724405288, curr_best_eval_iter: 9
+
+Train epoch: 10, loss: -0.9866755369350314, elapsed time: 383.9718737602234, temperature: 0.17029583333333334
+Train score at epoch 10: -0.9866755369350314
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 10, loss: -0.9991471523523331, elapsed time: 28.205554485321045, temperature: 0.1554875
+Dev score at epoch 10: -0.9991471523523331
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9996331724405288, curr_best_eval_iter: 9
+
+Train epoch: 11, loss: -0.9868385615572334, elapsed time: 389.7535500526428, temperature: 0.16733416666666667
+Train score at epoch 11: -0.9868385615572334
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 11, loss: -0.999652354812622, elapsed time: 28.16771411895752, temperature: 0.15104499999999998
+Dev score at epoch 11: -0.999652354812622
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.999652354812622, curr_best_eval_iter: 11
+
+Train epoch: 12, loss: -0.9869111149728298, elapsed time: 383.4533123970032, temperature: 0.1643725
+Train score at epoch 12: -0.9869111149728298
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 12, loss: -0.9995928296208382, elapsed time: 28.080666065216064, temperature: 0.1466025
+Dev score at epoch 12: -0.9995928296208382
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.999652354812622, curr_best_eval_iter: 11
+
+Train epoch: 13, loss: -0.9870336914017797, elapsed time: 390.37116742134094, temperature: 0.16141083333333334
+Train score at epoch 13: -0.9870336914017797
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 13, loss: -0.9996680123209953, elapsed time: 28.230191946029663, temperature: 0.14216
+Dev score at epoch 13: -0.9996680123209953
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9996680123209953, curr_best_eval_iter: 13
+
+Train epoch: 14, loss: -0.9869835924863816, elapsed time: 388.5805721282959, temperature: 0.15844916666666664
+Train score at epoch 14: -0.9869835924863816
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 14, loss: -0.9996701795339584, elapsed time: 27.932995796203613, temperature: 0.1377175
+Dev score at epoch 14: -0.9996701795339584
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9996701795339584, curr_best_eval_iter: 14
+
+Train epoch: 15, loss: -0.9869149900868535, elapsed time: 387.279985666275, temperature: 0.1554875
+Train score at epoch 15: -0.9869149900868535
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 15, loss: -0.9997183470010758, elapsed time: 28.396944999694824, temperature: 0.133275
+Dev score at epoch 15: -0.9997183470010758
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9997183470010758, curr_best_eval_iter: 15
+
+Train epoch: 16, loss: -0.9872273098200559, elapsed time: 388.0775234699249, temperature: 0.15252583333333333
+Train score at epoch 16: -0.9872273098200559
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 16, loss: -0.9996768210172653, elapsed time: 27.86782431602478, temperature: 0.1288325
+Dev score at epoch 16: -0.9996768210172653
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9997183470010758, curr_best_eval_iter: 15
+
+Train epoch: 17, loss: -0.9871195593073964, elapsed time: 386.8806710243225, temperature: 0.14956416666666666
+Train score at epoch 17: -0.9871195593073964
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 17, loss: -0.9994093113183975, elapsed time: 28.212019205093384, temperature: 0.12438999999999999
+Dev score at epoch 17: -0.9994093113183975
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9997183470010758, curr_best_eval_iter: 15
+
+Train epoch: 18, loss: -0.9871040819585324, elapsed time: 384.6659185886383, temperature: 0.1466025
+Train score at epoch 18: -0.9871040819585324
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 18, loss: -0.9996887866616249, elapsed time: 28.064173460006714, temperature: 0.11994750000000001
+Dev score at epoch 18: -0.9996887866616249
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9997183470010758, curr_best_eval_iter: 15
+
+Train epoch: 19, loss: -0.9871061154991388, elapsed time: 384.5006663799286, temperature: 0.14364083333333333
+Train score at epoch 19: -0.9871061154991388
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 19, loss: -0.9997399971961975, elapsed time: 27.879601001739502, temperature: 0.115505
+Dev score at epoch 19: -0.9997399971961975
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9997399971961975, curr_best_eval_iter: 19
+
+Train epoch: 20, loss: -0.9871583241507411, elapsed time: 388.50158643722534, temperature: 0.1406791666666667
+Train score at epoch 20: -0.9871583241507411
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 20, loss: -0.9997292479395866, elapsed time: 28.199684619903564, temperature: 0.1110625
+Dev score at epoch 20: -0.9997292479395866
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9997399971961975, curr_best_eval_iter: 19
+
+Train epoch: 21, loss: -0.9871765746682882, elapsed time: 390.48734283447266, temperature: 0.1377175
+Train score at epoch 21: -0.9871765746682882
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 21, loss: -0.9997554276466369, elapsed time: 28.242553234100342, temperature: 0.10661999999999999
+Dev score at epoch 21: -0.9997554276466369
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9997554276466369, curr_best_eval_iter: 21
+
+Train epoch: 22, loss: -0.9871992414265871, elapsed time: 383.59600257873535, temperature: 0.13475583333333332
+Train score at epoch 22: -0.9871992414265871
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 22, loss: -0.9996513109683991, elapsed time: 28.365641832351685, temperature: 0.10217749999999999
+Dev score at epoch 22: -0.9996513109683991
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9997554276466369, curr_best_eval_iter: 21
+
+Train epoch: 23, loss: -0.9870663313642144, elapsed time: 390.0500032901764, temperature: 0.13179416666666666
+Train score at epoch 23: -0.9870663313642144
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 23, loss: -0.9997502920508384, elapsed time: 28.30396056175232, temperature: 0.097735
+Dev score at epoch 23: -0.9997502920508384
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9997554276466369, curr_best_eval_iter: 21
+
+Train epoch: 24, loss: -0.9872139861509204, elapsed time: 390.00881123542786, temperature: 0.1288325
+Train score at epoch 24: -0.9872139861509204
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 24, loss: -0.9997649677872658, elapsed time: 27.888931274414062, temperature: 0.0932925
+Dev score at epoch 24: -0.9997649677872658
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9997649677872658, curr_best_eval_iter: 24
+
+Train epoch: 25, loss: -0.9870857520550489, elapsed time: 384.339227437973, temperature: 0.12587083333333332
+Train score at epoch 25: -0.9870857520550489
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 25, loss: -0.9997766980051994, elapsed time: 28.273787021636963, temperature: 0.08885
+Dev score at epoch 25: -0.9997766980051994
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9997766980051994, curr_best_eval_iter: 25
+
+Train epoch: 26, loss: -0.9871693525463343, elapsed time: 391.00334882736206, temperature: 0.12290916666666667
+Train score at epoch 26: -0.9871693525463343
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 26, loss: -0.9997737899899483, elapsed time: 28.1963529586792, temperature: 0.0844075
+Dev score at epoch 26: -0.9997737899899483
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9997766980051994, curr_best_eval_iter: 25
+
+Train epoch: 27, loss: -0.9872394722446799, elapsed time: 390.39890575408936, temperature: 0.11994750000000001
+Train score at epoch 27: -0.9872394722446799
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 27, loss: -0.999780254304409, elapsed time: 28.244397163391113, temperature: 0.079965
+Dev score at epoch 27: -0.999780254304409
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.999780254304409, curr_best_eval_iter: 27
+
+Train epoch: 28, loss: -0.9872316954702139, elapsed time: 390.365709066391, temperature: 0.11698583333333333
+Train score at epoch 28: -0.9872316954702139
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 28, loss: -0.9997961991071701, elapsed time: 28.236490488052368, temperature: 0.0755225
+Dev score at epoch 28: -0.9997961991071701
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9997961991071701, curr_best_eval_iter: 28
+
+Train epoch: 29, loss: -0.9871921721279621, elapsed time: 390.71429324150085, temperature: 0.11402416666666665
+Train score at epoch 29: -0.9871921721279621
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 29, loss: -0.9997990285396576, elapsed time: 28.222919702529907, temperature: 0.07108
+Dev score at epoch 29: -0.9997990285396576
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9997990285396576, curr_best_eval_iter: 29
+
+Train epoch: 30, loss: -0.9871776934489608, elapsed time: 390.5401473045349, temperature: 0.1110625
+Train score at epoch 30: -0.9871776934489608
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 30, loss: -0.9997946091651917, elapsed time: 28.2093563079834, temperature: 0.0666375
+Dev score at epoch 30: -0.9997946091651917
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9997990285396576, curr_best_eval_iter: 29
+
+Train epoch: 31, loss: -0.9873268987685442, elapsed time: 383.6858546733856, temperature: 0.10810083333333333
+Train score at epoch 31: -0.9873268987685442
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 31, loss: -0.9997911108851433, elapsed time: 28.211819887161255, temperature: 0.06219499999999999
+Dev score at epoch 31: -0.9997911108851433
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9997990285396576, curr_best_eval_iter: 29
+
+Train epoch: 32, loss: -0.9871886166393757, elapsed time: 390.6141083240509, temperature: 0.10513916666666667
+Train score at epoch 32: -0.9871886166393757
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 32, loss: -0.9998247633457183, elapsed time: 28.145374298095703, temperature: 0.05775249999999999
+Dev score at epoch 32: -0.9998247633457183
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9998247633457183, curr_best_eval_iter: 32
+
+Train epoch: 33, loss: -0.9872277601420879, elapsed time: 388.3166000843048, temperature: 0.10217749999999999
+Train score at epoch 33: -0.9872277601420879
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 33, loss: -0.9998271728873253, elapsed time: 27.928853511810303, temperature: 0.05331000000000001
+Dev score at epoch 33: -0.9998271728873253
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9998271728873253, curr_best_eval_iter: 33
+
+Train epoch: 34, loss: -0.9872910924911499, elapsed time: 385.4978289604187, temperature: 0.09921583333333334
+Train score at epoch 34: -0.9872910924911499
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 34, loss: -0.9998380048751832, elapsed time: 28.298737287521362, temperature: 0.0488675
+Dev score at epoch 34: -0.9998380048751832
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9998380048751832, curr_best_eval_iter: 34
+
+Train epoch: 35, loss: -0.9871688740000129, elapsed time: 390.05262184143066, temperature: 0.09625416666666665
+Train score at epoch 35: -0.9871688740000129
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 35, loss: -0.999850461935997, elapsed time: 28.270838260650635, temperature: 0.044425
+Dev score at epoch 35: -0.999850461935997
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.999850461935997, curr_best_eval_iter: 35
+
+Train epoch: 36, loss: -0.9871258460178971, elapsed time: 387.51294708251953, temperature: 0.0932925
+Train score at epoch 36: -0.9871258460178971
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 36, loss: -0.9998568739891053, elapsed time: 27.93247127532959, temperature: 0.0399825
+Dev score at epoch 36: -0.9998568739891053
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9998568739891053, curr_best_eval_iter: 36
+
+Train epoch: 37, loss: -0.987259913803637, elapsed time: 382.09799551963806, temperature: 0.09033083333333333
+Train score at epoch 37: -0.987259913803637
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 37, loss: -0.9998705751180649, elapsed time: 27.869603157043457, temperature: 0.03553999999999999
+Dev score at epoch 37: -0.9998705751180649
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9998705751180649, curr_best_eval_iter: 37
+
+Train epoch: 38, loss: -0.9872960226818919, elapsed time: 381.22310614585876, temperature: 0.08736916666666666
+Train score at epoch 38: -0.9872960226818919
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 38, loss: -0.9998872818112373, elapsed time: 27.940656900405884, temperature: 0.031097500000000007
+Dev score at epoch 38: -0.9998872818112373
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9998872818112373, curr_best_eval_iter: 38
+
+Train epoch: 39, loss: -0.9872457442611456, elapsed time: 383.2436668872833, temperature: 0.0844075
+Train score at epoch 39: -0.9872457442611456
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 39, loss: -0.9998953357338906, elapsed time: 28.20020341873169, temperature: 0.026655000000000005
+Dev score at epoch 39: -0.9998953357338906
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9998953357338906, curr_best_eval_iter: 39
+
+Train epoch: 40, loss: -0.9873385493606329, elapsed time: 382.8279507160187, temperature: 0.08144583333333334
+Train score at epoch 40: -0.9873385493606329
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 40, loss: -0.9998387124538421, elapsed time: 28.28834581375122, temperature: 0.0222125
+Dev score at epoch 40: -0.9998387124538421
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9998953357338906, curr_best_eval_iter: 39
+
+Train epoch: 41, loss: -0.9872913106784225, elapsed time: 390.1841390132904, temperature: 0.07848416666666666
+Train score at epoch 41: -0.9872913106784225
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 41, loss: -0.9998203525066376, elapsed time: 28.257856130599976, temperature: 0.017770000000000015
+Dev score at epoch 41: -0.9998203525066376
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9998953357338906, curr_best_eval_iter: 39
+
+Train epoch: 42, loss: -0.9873110696285963, elapsed time: 389.7965226173401, temperature: 0.0755225
+Train score at epoch 42: -0.9873110696285963
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 42, loss: -0.9999418334603309, elapsed time: 28.261375904083252, temperature: 0.013327499999999992
+Dev score at epoch 42: -0.9999418334603309
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9999418334603309, curr_best_eval_iter: 42
+
+Train epoch: 43, loss: -0.9872311733484268, elapsed time: 382.4401638507843, temperature: 0.07256083333333332
+Train score at epoch 43: -0.9872311733484268
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 43, loss: -0.9999558448553085, elapsed time: 27.943502187728882, temperature: 0.008885000000000007
+Dev score at epoch 43: -0.9999558448553085
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9999558448553085, curr_best_eval_iter: 43
+
+Train epoch: 44, loss: -0.9873990261405706, elapsed time: 386.30438923835754, temperature: 0.06959916666666667
+Train score at epoch 44: -0.9873990261405706
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 44, loss: -0.9999708954334259, elapsed time: 28.205026865005493, temperature: 0.004442499999999984
+Dev score at epoch 44: -0.9999708954334259
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9999708954334259, curr_best_eval_iter: 44
+
+Train epoch: 45, loss: -0.9873554426640272, elapsed time: 383.9296045303345, temperature: 0.0666375
+Train score at epoch 45: -0.9873554426640272
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 45, loss: nan, elapsed time: 28.331044912338257, temperature: 0.0
+Dev score at epoch 45: nan
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -0.9999708954334259, curr_best_eval_iter: 44
+
+Train epoch: 46, loss: -0.9872983240619302, elapsed time: 391.2791528701782, temperature: 0.06367583333333332
+Train score at epoch 46: -0.9872983240619302
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 46, loss: -1.0000431637048721, elapsed time: 28.217715740203857, temperature: -0.004442499999999984
+Dev score at epoch 46: -1.0000431637048721
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -1.0000431637048721, curr_best_eval_iter: 46
+
+Train epoch: 47, loss: -0.9871891186788678, elapsed time: 391.1643650531769, temperature: 0.060714166666666666
+Train score at epoch 47: -0.9871891186788678
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_latest.pt, please do not terminate
+Checkpoint complete
+Dev epoch: 47, loss: -1.0000483005523682, elapsed time: 28.213722944259644, temperature: -0.008885000000000007
+Dev score at epoch 47: -1.0000483005523682
+Saving model to /home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder_model_seed262_best.pt, please do not terminate
+Checkpoint complete
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+curr_best_eval_perf: -1.0000483005523682, curr_best_eval_iter: 47
+
+Training interrupted
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=262, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_dropout_encoder_model_seed262', family_train='nb101+nb201c10+nb301+ofa_pn+ofa_mbv3+ofa_resnet+hiaml+inception+two_path', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=100, fine_tune_epochs=100, batch_size=64, initial_lr=0.0005, in_channels=128, hidden_size=128, out_channels=128, num_layers=6, dropout_prob=0.4, aggr_method='mean', gnn_activ='relu', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 262
+My cuda seed is 262
+Train Families: ['hiaml', 'inception', 'nb101', 'nb201c10', 'nb301', 'ofa_mbv3', 'ofa_pn', 'ofa_resnet', 'two_path']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['hiaml', 'inception', 'nb101', 'nb201c10', 'nb301', 'ofa_mbv3', 'ofa_pn', 'ofa_resnet', 'two_path']
+Loading hiaml cache data...
+Specified normalize_HW_per_family=False
+Family hiaml train size: 3705
+Family hiaml dev size: 462
+Family hiaml test size: 462
+Loading inception cache data...
+Specified normalize_HW_per_family=False
+Family inception train size: 464
+Family inception dev size: 58
+Family inception test size: 58
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Loading nb201c10 cache data...
+Specified normalize_HW_per_family=False
+Family nb201c10 train size: 3278
+Family nb201c10 dev size: 409
+Family nb201c10 test size: 409
+Loading nb301 cache data...
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=262, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_dropout_encoder_model_seed262', family_train='nb101+nb201c10+nb301+ofa_pn+ofa_mbv3+ofa_resnet+hiaml+inception+two_path', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=100, fine_tune_epochs=100, batch_size=64, initial_lr=0.0005, in_channels=128, hidden_size=128, out_channels=128, num_layers=6, dropout_prob=0.4, aggr_method='mean', gnn_activ='relu', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 262
+My cuda seed is 262
+Train Families: ['hiaml', 'inception', 'nb101', 'nb201c10', 'nb301', 'ofa_mbv3', 'ofa_pn', 'ofa_resnet', 'two_path']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['hiaml', 'inception', 'nb101', 'nb201c10', 'nb301', 'ofa_mbv3', 'ofa_pn', 'ofa_resnet', 'two_path']
+Loading hiaml cache data...
+Specified normalize_HW_per_family=False
+Family hiaml train size: 3705
+Family hiaml dev size: 462
+Family hiaml test size: 462
+Loading inception cache data...
+Specified normalize_HW_per_family=False
+Family inception train size: 464
+Family inception dev size: 58
+Family inception test size: 58
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Loading nb201c10 cache data...
+Specified normalize_HW_per_family=False
+Family nb201c10 train size: 3278
+Family nb201c10 dev size: 409
+Family nb201c10 test size: 409
+Loading nb301 cache data...
+Specified normalize_HW_per_family=False
+Family nb301 train size: 8000
+Family nb301 dev size: 1000
+Family nb301 test size: 1000
+Loading ofa_mbv3 cache data...
+Specified normalize_HW_per_family=False
+Family ofa_mbv3 train size: 5993
+Family ofa_mbv3 dev size: 749
+Family ofa_mbv3 test size: 749
+Loading ofa_pn cache data...
+Specified normalize_HW_per_family=False
+Family ofa_pn train size: 6566
+Family ofa_pn dev size: 820
+Family ofa_pn test size: 820
+Loading ofa_resnet cache data...
+Specified normalize_HW_per_family=False
+Family ofa_resnet train size: 8000
+Family ofa_resnet dev size: 1000
+Family ofa_resnet test size: 1000
+Loading two_path cache data...
+Specified normalize_HW_per_family=False
+Family two_path train size: 5512
+Family two_path dev size: 689
+Family two_path test size: 689
+Max hiaml target value: 0.9344
+Min hiaml target value: 0.9111
+Avg hiaml target value: 0.923140436765061
+Max inception target value: 0.9403
+Min inception target value: 0.8908
+Avg inception target value: 0.9189373563218389
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max nb201c10 target value: 0.9437333333333333
+Min nb201c10 target value: 0.4624666666666667
+Avg nb201c10 target value: 0.8946286095289739
+Max nb301 target value: 0.9466606903076172
+Min nb301 target value: 0.8827594757080078
+Avg nb301 target value: 0.930337911690609
+Max ofa_mbv3 target value: 0.7883400131225586
+Min ofa_mbv3 target value: 0.7358800144195556
+Avg ofa_mbv3 target value: 0.7694520710211866
+Max ofa_pn target value: 0.7780600170135499
+Min ofa_pn target value: 0.7175000156402588
+Avg ofa_pn target value: 0.7541106786735148
+Max ofa_resnet target value: 0.7994
+Min ofa_resnet target value: 0.75248
+Avg ofa_resnet target value: 0.7819411822222215
+Max two_path target value: 0.9234
+Min two_path target value: 0.8553000000000001
+Avg two_path target value: 0.8983231575552276
+Max global target value: 0.9466606903076172
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8693329953491995
+Train size: 81518
+Dev size: 10187
+Test size: 10187
+Max num nodes: 1586
+Min num nodes: 29
+Avg num nodes: 251.26455462646723
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_dropout_encoder_model_seed262
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 120)
+    (weighted_embed_layer): Embedding(32, 110)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+    )
+    (activ): ReLU()
+    (dropout): Dropout(p=0.4, inplace=False)
+    (dropout_attn): Dropout(p=0.2, inplace=False)
+    (init_ff): Linear(in_features=256, out_features=128, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=128, out_features=128, bias=True)
+      (key_layer): Linear(in_features=128, out_features=128, bias=True)
+      (value_layer): Linear(in_features=128, out_features=128, bias=True)
+      (output_layer): Linear(in_features=128, out_features=128, bias=True)
+    )
+    (combination_layer): Linear(in_features=256, out_features=128, bias=True)
+  )
+  (projection_layer): Linear(in_features=256, out_features=64, bias=False)
+)
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+Number of trainable parameters: 353822
+Training for 100 epochs
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=262, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_dropout_encoder_model_seed262', family_train='nb101+nb201c10+nb301+ofa_pn+ofa_mbv3+ofa_resnet+hiaml+inception+two_path', family_test='nb201c10#50+nb301#50+ofa_pn#50+ofa_mbv3#50+ofa_resnet#50+hiaml#50+inception#50+two_path#50', dev_ratio=0.1, test_ratio=0.1, epochs=100, fine_tune_epochs=100, batch_size=32, initial_lr=0.0005, in_channels=128, hidden_size=128, out_channels=128, num_layers=6, dropout_prob=0.4, aggr_method='mean', gnn_activ='relu', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 262
+My cuda seed is 262
+Train Families: ['hiaml', 'inception', 'nb101', 'nb201c10', 'nb301', 'ofa_mbv3', 'ofa_pn', 'ofa_resnet', 'two_path']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_pn#50', 'ofa_mbv3#50', 'ofa_resnet#50', 'hiaml#50', 'inception#50', 'two_path#50']
+Cache validated for ['hiaml', 'inception', 'nb101', 'nb201c10', 'nb301', 'ofa_mbv3', 'ofa_pn', 'ofa_resnet', 'two_path']
+Loading hiaml cache data...
+Specified normalize_HW_per_family=False
+Family hiaml train size: 3705
+Family hiaml dev size: 462
+Family hiaml test size: 462
+Loading inception cache data...
+Specified normalize_HW_per_family=False
+Family inception train size: 464
+Family inception dev size: 58
+Family inception test size: 58
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Loading nb201c10 cache data...
+Specified normalize_HW_per_family=False
+Family nb201c10 train size: 3278
+Family nb201c10 dev size: 409
+Family nb201c10 test size: 409
+Loading nb301 cache data...
+Specified normalize_HW_per_family=False
+Family nb301 train size: 8000
+Family nb301 dev size: 1000
+Family nb301 test size: 1000
+Loading ofa_mbv3 cache data...
+Specified normalize_HW_per_family=False
+Family ofa_mbv3 train size: 5993
+Family ofa_mbv3 dev size: 749
+Family ofa_mbv3 test size: 749
+Loading ofa_pn cache data...
+Specified normalize_HW_per_family=False
+Family ofa_pn train size: 6566
+Family ofa_pn dev size: 820
+Family ofa_pn test size: 820
+Loading ofa_resnet cache data...
+Specified normalize_HW_per_family=False
+Family ofa_resnet train size: 8000
+Family ofa_resnet dev size: 1000
+Family ofa_resnet test size: 1000
+Loading two_path cache data...
+Specified normalize_HW_per_family=False
+Family two_path train size: 5512
+Family two_path dev size: 689
+Family two_path test size: 689
+Max hiaml target value: 0.9344
+Min hiaml target value: 0.9111
+Avg hiaml target value: 0.923140436765061
+Max inception target value: 0.9403
+Min inception target value: 0.8908
+Avg inception target value: 0.9189373563218389
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max nb201c10 target value: 0.9437333333333333
+Min nb201c10 target value: 0.4624666666666667
+Avg nb201c10 target value: 0.8946286095289739
+Max nb301 target value: 0.9466606903076172
+Min nb301 target value: 0.8827594757080078
+Avg nb301 target value: 0.930337911690609
+Max ofa_mbv3 target value: 0.7883400131225586
+Min ofa_mbv3 target value: 0.7358800144195556
+Avg ofa_mbv3 target value: 0.7694520710211866
+Max ofa_pn target value: 0.7780600170135499
+Min ofa_pn target value: 0.7175000156402588
+Avg ofa_pn target value: 0.7541106786735148
+Max ofa_resnet target value: 0.7994
+Min ofa_resnet target value: 0.75248
+Avg ofa_resnet target value: 0.7819411822222215
+Max two_path target value: 0.9234
+Min two_path target value: 0.8553000000000001
+Avg two_path target value: 0.8983231575552276
+Max global target value: 0.9466606903076172
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8693329953491995
+Train size: 81518
+Dev size: 10187
+Test size: 10187
+Max num nodes: 1586
+Min num nodes: 29
+Avg num nodes: 251.26455462646723
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_dropout_encoder_model_seed262
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 120)
+    (weighted_embed_layer): Embedding(32, 110)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+    )
+    (activ): ReLU()
+    (dropout): Dropout(p=0.4, inplace=False)
+    (dropout_attn): Dropout(p=0.2, inplace=False)
+    (init_ff): Linear(in_features=256, out_features=128, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=128, out_features=128, bias=True)
+      (key_layer): Linear(in_features=128, out_features=128, bias=True)
+      (value_layer): Linear(in_features=128, out_features=128, bias=True)
+      (output_layer): Linear(in_features=128, out_features=128, bias=True)
+    )
+    (combination_layer): Linear(in_features=256, out_features=128, bias=True)
+  )
+  (projection_layer): Linear(in_features=256, out_features=64, bias=False)
+)
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+Number of trainable parameters: 353822
+Training for 100 epochs
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=262, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_dropout_encoder_model_seed262', family_train='nb101+nb201c10+nb301+ofa_resnet', family_test='nb201c10#50+nb301#50+ofa_resnet#50', dev_ratio=0.1, test_ratio=0.1, epochs=100, fine_tune_epochs=100, batch_size=32, initial_lr=0.0005, in_channels=128, hidden_size=128, out_channels=128, num_layers=6, dropout_prob=0.4, aggr_method='mean', gnn_activ='relu', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 262
+My cuda seed is 262
+Train Families: ['nb101', 'nb201c10', 'nb301', 'ofa_resnet']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_resnet#50']
+Cache validated for ['nb101', 'nb201c10', 'nb301', 'ofa_resnet']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Loading nb201c10 cache data...
+Specified normalize_HW_per_family=False
+Family nb201c10 train size: 3278
+Family nb201c10 dev size: 409
+Family nb201c10 test size: 409
+Loading nb301 cache data...
+Specified normalize_HW_per_family=False
+Family nb301 train size: 8000
+Family nb301 dev size: 1000
+Family nb301 test size: 1000
+Loading ofa_resnet cache data...
+Specified normalize_HW_per_family=False
+Family ofa_resnet train size: 8000
+Family ofa_resnet dev size: 1000
+Family ofa_resnet test size: 1000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max nb201c10 target value: 0.9437333333333333
+Min nb201c10 target value: 0.4624666666666667
+Avg nb201c10 target value: 0.8946286095289739
+Max nb301 target value: 0.9466606903076172
+Min nb301 target value: 0.8827594757080078
+Avg nb301 target value: 0.930337911690609
+Max ofa_resnet target value: 0.7994
+Min ofa_resnet target value: 0.75248
+Avg ofa_resnet target value: 0.7819411822222215
+Max global target value: 0.9466606903076172
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8857462714320729
+Train size: 59278
+Dev size: 7409
+Test size: 7409
+Max num nodes: 1334
+Min num nodes: 54
+Avg num nodes: 287.3451468365364
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_dropout_encoder_model_seed262
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=262, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_dropout_encoder_model_seed262', family_train='nb101+nb201c10+nb301+ofa_resnet', family_test='nb201c10#50+nb301#50+ofa_resnet#50', dev_ratio=0.1, test_ratio=0.1, epochs=100, fine_tune_epochs=100, batch_size=32, initial_lr=0.001, in_channels=128, hidden_size=128, out_channels=128, num_layers=6, dropout_prob=0.4, aggr_method='mean', gnn_activ='relu', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 262
+My cuda seed is 262
+Train Families: ['nb101', 'nb201c10', 'nb301', 'ofa_resnet']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_resnet#50']
+Cache validated for ['nb101', 'nb201c10', 'nb301', 'ofa_resnet']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Loading nb201c10 cache data...
+Specified normalize_HW_per_family=False
+Family nb201c10 train size: 3278
+Family nb201c10 dev size: 409
+Family nb201c10 test size: 409
+Loading nb301 cache data...
+Specified normalize_HW_per_family=False
+Family nb301 train size: 8000
+Family nb301 dev size: 1000
+Family nb301 test size: 1000
+Loading ofa_resnet cache data...
+Specified normalize_HW_per_family=False
+Family ofa_resnet train size: 8000
+Family ofa_resnet dev size: 1000
+Family ofa_resnet test size: 1000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max nb201c10 target value: 0.9437333333333333
+Min nb201c10 target value: 0.4624666666666667
+Avg nb201c10 target value: 0.8946286095289739
+Max nb301 target value: 0.9466606903076172
+Min nb301 target value: 0.8827594757080078
+Avg nb301 target value: 0.930337911690609
+Max ofa_resnet target value: 0.7994
+Min ofa_resnet target value: 0.75248
+Avg ofa_resnet target value: 0.7819411822222215
+Max global target value: 0.9466606903076172
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8857462714320729
+Train size: 59278
+Dev size: 7409
+Test size: 7409
+Max num nodes: 1334
+Min num nodes: 54
+Avg num nodes: 287.3451468365364
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_dropout_encoder_model_seed262
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+Saved models dir: /home/ec2-user/nas-rec-engine/saved_models
+Log dir: /home/ec2-user/nas-rec-engine/logs
+Params: Namespace(device_str=None, seed=262, max_gradient_norm=5.0, logs_dir='/home/ec2-user/nas-rec-engine/logs', saved_models_dir='/home/ec2-user/nas-rec-engine/saved_models', saved_model_file='/home/ec2-user/nas-rec-engine/saved_models/default_model.pt', allow_parallel=False, model_name='gpi_acc_predictor_CL_dropout_encoder_model_seed262', family_train='nb101+ofa_resnet', family_test='nb201c10#50+nb301#50+ofa_resnet#50', dev_ratio=0.1, test_ratio=0.1, epochs=100, fine_tune_epochs=100, batch_size=32, initial_lr=0.001, in_channels=128, hidden_size=128, out_channels=128, num_layers=6, dropout_prob=0.4, aggr_method='mean', gnn_activ='relu', reg_activ=None, gnn_type='GINConv', normalize_HW_per_family=False, e_chk=None)
+My seed is 262
+My cuda seed is 262
+Train Families: ['nb101', 'ofa_resnet']
+Test Families: ['nb201c10#50', 'nb301#50', 'ofa_resnet#50']
+Cache validated for ['nb101', 'ofa_resnet']
+Loading nb101 cache data...
+Specified normalize_HW_per_family=False
+Family nb101 train size: 40000
+Family nb101 dev size: 5000
+Family nb101 test size: 5000
+Loading ofa_resnet cache data...
+Specified normalize_HW_per_family=False
+Family ofa_resnet train size: 8000
+Family ofa_resnet dev size: 1000
+Family ofa_resnet test size: 1000
+Max nb101 target value: 0.9409388303756714
+Min nb101 target value: 0.09995993723471959
+Avg nb101 target value: 0.8968612016542681
+Max ofa_resnet target value: 0.7994
+Min ofa_resnet target value: 0.75248
+Avg ofa_resnet target value: 0.7819411822222215
+Max global target value: 0.9409388303756714
+Min global target value: 0.09995993723471959
+Avg global target value: 0.8777078650822567
+Train size: 48000
+Dev size: 6000
+Test size: 6000
+Max num nodes: 288
+Min num nodes: 54
+Avg num nodes: 186.19636666666668
+0 overlap(s) between train/dev loaders
+0 overlap(s) between train/test loaders
+0 overlap(s) between dev/test loaders
+Initializing gpi_acc_predictor_CL_dropout_encoder_model_seed262
+GraphAutoEncoder(
+  (embed_layer): CGNodeEmbedding(
+    (regular_embed_layer): Embedding(32, 120)
+    (weighted_embed_layer): Embedding(32, 110)
+    (kernel_embed_layer): Embedding(8, 4)
+    (shape_embed_layer): Linear(in_features=6, out_features=8, bias=True)
+    (bias_embed_layer): Linear(in_features=2, out_features=2, bias=True)
+  )
+  (encoder): PreEmbeddedGraphEncoderWithAttention(
+    (gnn_layers): ModuleList(
+      (0): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (1): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (2): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (3): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (4): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+      (5): GINConv(nn=Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): Linear(in_features=128, out_features=128, bias=True)
+      ))
+    )
+    (activ): ReLU()
+    (dropout): Dropout(p=0.4, inplace=False)
+    (dropout_attn): Dropout(p=0.2, inplace=False)
+    (init_ff): Linear(in_features=256, out_features=128, bias=True)
+    (att_mechanism): DoubleHeadedAttention(
+      (query_layer): Linear(in_features=128, out_features=128, bias=True)
+      (key_layer): Linear(in_features=128, out_features=128, bias=True)
+      (value_layer): Linear(in_features=128, out_features=128, bias=True)
+      (output_layer): Linear(in_features=128, out_features=128, bias=True)
+    )
+    (combination_layer): Linear(in_features=256, out_features=128, bias=True)
+  )
+  (projection_layer): Linear(in_features=256, out_features=64, bias=False)
+)
+Model name: gpi_acc_predictor_CL_dropout_encoder_model_seed262
+Number of trainable parameters: 353822
+Training for 100 epochs
+Training interrupted

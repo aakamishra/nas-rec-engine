@@ -25,29 +25,24 @@ def prepare_local_params(parser, ext_args=None):
     parser.add_argument("-model_name", required=False, type=str,
                         default="CL_dropout_encoder_model")
     parser.add_argument("-family_train", required=False, type=str,
-                        default="nb101"
+                        default="nb101+nb201c10+ofa_resnet"
                         )
     parser.add_argument('-family_test', required=False, type=str,
                         default="nb201c10#50"
                                 "+nb301#50"
-                                "+ofa_pn#50"
-                                "+ofa_mbv3#50"
-                                "+ofa_resnet#50"
-                                "+hiaml#50"
-                                "+inception#50"
-                                "+two_path#50")
+                                "+ofa_resnet#50")
     parser.add_argument("-dev_ratio", required=False, type=float,
                         default=0.1)
     parser.add_argument("-test_ratio", required=False, type=float,
                         default=0.1)
     parser.add_argument("-epochs", required=False, type=int,
-                        default=60)
+                        default=100)
     parser.add_argument("-fine_tune_epochs", required=False, type=int,
                         default=100)
     parser.add_argument("-batch_size", required=False, type=int,
-                        default=64)
+                        default=32)
     parser.add_argument("-initial_lr", required=False, type=float,
-                        default=0.0001)
+                        default=0.001)
     parser.add_argument("-in_channels", help="", type=int,
                         default=128, required=False)
     parser.add_argument("-hidden_size", help="", type=int,
@@ -169,6 +164,8 @@ def main(params):
                               gnn_activ=get_activ_by_name(params.gnn_activ), n_gnn_layers=params.num_layers,
                               dropout_prob=params.dropout_prob, aggr_method=params.aggr_method,
                               regressor_activ=get_activ_by_name(params.reg_activ)).to(device())
+    
+    print("made model")
 
     if params.e_chk is not None:
         book_keeper.load_model_checkpoint(model, allow_silent_fail=False, skip_eval_perfs=True,

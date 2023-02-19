@@ -220,5 +220,74 @@ class PreEmbeddedGraphDecoder(torch.nn.Module):
         
         return x, adj
         
-    
+class TransformerDecoder(torch.nn.Module):
+    def __init__(self, output_size, hidden_size, num_layers, num_heads, dropout):
+        super().__init__()
+
+        self.output_size = output_size
+        self.hidden_size = hidden_size
+        self.num_layers = num_layers
+        self.num_heads = num_heads
+
+        self.dropout = torch.nn.Dropout(dropout)
+
+        self.embedding = torch.nn.Embedding(output_size, hidden_size)
+        self.positional_encoding = self._generate_positional_encoding(hidden_size)
+
+        self.attention_layers = torch.nn.ModuleList([
+            torch.nn.MultiheadAttention(hidden_size, num_heads, dropout=dropout)
+            for _ in range(num_layers)
+        ])
+
+        self.encoder_attention_layers = torch.nn.ModuleList([
+            torch.nn.MultiheadAttention(hidden_size, num_heads, dropout=dropout)
+            for _ in range(num_layers)
+        ])
+
+        self.feedforward_layers = torch.nn.ModuleList([
+            torch.nn.Sequential(
+                torch.nn.Linear(hidden_size, hidden_size * 4),
+                torch.nn.ReLU(),
+                torch.nn.Linear(hidden_size * 4, hidden_size),
+                torch.nn.Dropout(dropout),
+            )
+            for _ in range(num_layers)
+        ])
+
+        self.layer_norms = torch.nn.ModuleList([torch.nn.LayerNorm(hidden_size) for _ in range(num_layers)])
+
+    def forward(self, inputs, encoder_outputs):
+        # Compute the input embeddings and add positional encoding
+        embeddings = self.embedding(inputs) * (self.hidden_size ** 0.5)
+        seq_len = inputs.size(1)
+        embeddings = embeddings + self.positional_encoding[:, :seq_len, :]
+
+        # Apply the self-attention layers
+        for i in range(self.num_layers):
+            residual = embeddings
+            embeddings, _ = self.attention_layers[i](embeddings, embeddings, embeddings)
+            embeddings = self.dropout(embeddings)
+            embeddings = self.layer_norms[i](residual + embeddings)
+
+            # Apply the encoder-decoder attention layers
+            residual = embeddings
+            embeddings, _ = self.encoder_attention_layers[i](embeddings, encoder_outputs, encoder_outputs)
+            embeddings = self.dropout(embeddings)
+            embeddings = self.layer_norms[i](residual + embeddings)
+
+            # Apply the feedforward layers
+            residual = embeddings
+            embeddings = self.feedforward_layers[i](embeddings)
+            embeddings = self.dropout(embeddings)
+            embeddings = self.layer_norms[i](residual + embeddings)
+
+        return embeddings
+
+    def _generate_positional_encoding(self, hidden_size, max_length=1000):
+        position = torch.arange(0, max_length).unsqueeze(1)
+        div_term = torch.exp(torch.arange(0, hidden_size, 2) * -(torch.log(torch.tensor(10000.0)) / hidden_size))
+        sinusoid = torch.sin(position * div_term)
+        cosinusoid = torch.cos(position * div_term)
+        positional_encoding = torch.cat([sinusoid, cosinusoid], dim=-1)
+        return positional_encoding.unsqueeze(0)
     
