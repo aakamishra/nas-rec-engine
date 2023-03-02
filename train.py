@@ -23,7 +23,7 @@ For building a generalizable predictor interface
 
 def prepare_local_params(parser, ext_args=None):
     parser.add_argument("-model_name", required=False, type=str,
-                        default="CL_dropout_encoder_model")
+                        default="CL_dropout_encoder_decoder_model")
     parser.add_argument("-family_train", required=False, type=str,
                         default="nb101+nb201c10+ofa_resnet"
                         )
@@ -38,7 +38,7 @@ def prepare_local_params(parser, ext_args=None):
     parser.add_argument("-epochs", required=False, type=int,
                         default=100)
     parser.add_argument("-fine_tune_epochs", required=False, type=int,
-                        default=100)
+                        default=0)
     parser.add_argument("-batch_size", required=False, type=int,
                         default=32)
     parser.add_argument("-initial_lr", required=False, type=float,
@@ -52,7 +52,7 @@ def prepare_local_params(parser, ext_args=None):
     parser.add_argument("-num_layers", help="", type=int,
                         default=6, required=False)
     parser.add_argument("-dropout_prob", help="", type=float,
-                        default=0.4, required=False)
+                        default=0.3, required=False)
     parser.add_argument("-aggr_method", required=False, type=str,
                         default="mean")
     parser.add_argument("-gnn_activ", required=False, type=str,

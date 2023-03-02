@@ -5,10 +5,6 @@ from tqdm import tqdm
 from constants import *
 from utils.model_utils import device
 from utils.eval_utils import get_regression_metrics, get_regression_rank_metrics
-from utils.graph_utils import edge_list_to_edge_matrix
-from sklearn.preprocessing import normalize
-from scipy.sparse.csgraph import laplacian
-import numpy as np
 from torch_geometric.utils import get_laplacian
 from torch_geometric.utils import to_dense_adj
 
@@ -122,8 +118,9 @@ def run_embedding_epoch(batch_fwd_func, model, loader, criterion, optimizer, boo
     if desc != "Train":
         temperature = 0.05
     for batch in tqdm(loader, desc=desc, ascii=True):
-        embed, nd_embed, re_nd_embed = batch_fwd_func(model, batch)
-        loss = SimCLRLoss(temperature)(embed, batch[DK_BATCH_EDGE_TSR_LIST])
+        embed, node_embed, decoder_node_embed = batch_fwd_func(model, batch)
+        cos_loss = (1 - torch.nn.functional.cosine_similarity(node_embed, decoder_node_embed)).mean()
+        loss = SimCLRLoss(temperature)(embed, batch[DK_BATCH_EDGE_TSR_LIST]) + cos_loss
         total_loss += loss.item() * batch[DK_BATCH_SIZE]
         if optimizer is not None:
             optimizer.zero_grad()
