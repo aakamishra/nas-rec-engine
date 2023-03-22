@@ -21,6 +21,21 @@ def get_reg_truth_and_preds(model, loader, fwd_func):
 
     return labels, preds
 
+def get_reg_truth_and_predsV2(model, loader, fwd_func):
+
+    labels = []
+    preds = []
+    with torch.no_grad():
+        for batch in loader:
+            batch_labs = batch[DK_BATCH_TARGET_TSR]
+            labels += batch_labs.detach().tolist()
+            batch_preds = fwd_func(model, batch)
+            preds += batch_preds.detach().tolist()
+
+    labels = np.array(labels).squeeze()
+    preds = np.array(preds).squeeze()
+
+    return labels, preds
 
 # Mean Squared Error - MSE
 # Mean Absolute Error - MAE
