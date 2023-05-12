@@ -13,7 +13,8 @@ from model_src.predictor.gpi_family_data_manager import FamilyDataManager
 from model_src.comp_graph.tf_comp_graph_dataloaders import CGRegressDataLoader
 from utils.model_utils import set_random_seed, device, add_weight_decay, get_activ_by_name
 from model_src.predictor.model_perf_predictor import train_predictor, run_predictor_demo, train_embedding_model
-
+import pickle
+import psutil
 
 """
 Naive accuracy predictor training routine
@@ -23,32 +24,30 @@ For building a generalizable predictor interface
 
 def prepare_local_params(parser, ext_args=None):
     parser.add_argument("-model_name", required=False, type=str,
-                        default="CL_dropout_encoder_decoder_model")
+                        default="CL_dropout_encoder2x256")
     parser.add_argument("-family_train", required=False, type=str,
-                        default="nb101+nb201c10+ofa_resnet"
+                        default="nb101"
                         )
     parser.add_argument('-family_test', required=False, type=str,
-                        default="nb201c10#50"
-                                "+nb301#50"
-                                "+ofa_resnet#50")
+                        default="nb201c10#50+nb301#50+ofa_resnet#50+ofa_pn#50+ofa_mbv3#50+hiaml#50+inception#50+two_path#50")
     parser.add_argument("-dev_ratio", required=False, type=float,
                         default=0.1)
     parser.add_argument("-test_ratio", required=False, type=float,
                         default=0.1)
     parser.add_argument("-epochs", required=False, type=int,
-                        default=100)
+                        default=200)
     parser.add_argument("-fine_tune_epochs", required=False, type=int,
                         default=0)
     parser.add_argument("-batch_size", required=False, type=int,
-                        default=32)
+                        default=64)
     parser.add_argument("-initial_lr", required=False, type=float,
-                        default=0.001)
+                        default=0.00001)
     parser.add_argument("-in_channels", help="", type=int,
-                        default=128, required=False)
+                        default=256, required=False)
     parser.add_argument("-hidden_size", help="", type=int,
-                        default=128, required=False)
+                        default=256, required=False)
     parser.add_argument("-out_channels", help="", type=int,
-                        default=128, required=False)
+                        default=256, required=False)
     parser.add_argument("-num_layers", help="", type=int,
                         default=6, required=False)
     parser.add_argument("-dropout_prob", help="", type=float,
@@ -63,7 +62,7 @@ def prepare_local_params(parser, ext_args=None):
                         default="GINConv")
     parser.add_argument("-normalize_HW_per_family", required=False, action="store_true",
                         default=False)
-    parser.add_argument('-e_chk', type=str, default=None, required=False)
+    parser.add_argument('-e_chk', type=str, default="/home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder2x256_seed109_best.pt", required=False)
     return parser.parse_args(ext_args)
 
 
@@ -93,39 +92,81 @@ def main(params):
     if type(params.family_test) is str:
         families_train = list(v for v in set(params.family_train.split("+")) if len(v) > 0)
         families_train.sort()
-        families_test = params.family_test.split("+")
     else:
         families_train = params.family_train
-        families_test = params.family_test
 
     book_keeper.log("Params: {}".format(params), verbose=False)
     set_random_seed(params.seed, log_f=book_keeper.log)
-    book_keeper.log("Train Families: {}".format(families_train))
-    book_keeper.log("Test Families: {}".format(families_test))
+    # book_keeper.log("Train Families: {}".format(families_train))
+    # book_keeper.log("Test Families: {}".format(families_test))
+    book_keeper.log("Logging that custom family is loaded")
 
-    families_test = get_family_train_size_dict(families_test)
+    # families_test = get_family_train_size_dict(families_test)
 
-    data_manager = FamilyDataManager(families_train, log_f=book_keeper.log)
-    family2sets = \
-        data_manager.get_regress_train_dev_test_sets(params.dev_ratio, params.test_ratio,
-                                                     normalize_HW_per_family=params.normalize_HW_per_family,
-                                                     normalize_target=False, group_by_family=True)
+    # data_manager = FamilyDataManager(families_train, log_f=book_keeper.log)
+    # family2sets = \
+    #     data_manager.get_regress_train_dev_test_sets(params.dev_ratio, params.test_ratio,
+    #                                                  normalize_HW_per_family=params.normalize_HW_per_family,
+    #                                                  normalize_target=False, group_by_family=True)
 
-    train_data, dev_data, test_data = [], [], []
-    for f, (fam_train, fam_dev, fam_test) in family2sets.items():
-        train_data.extend(fam_train)
-        dev_data.extend(fam_dev)
-        test_data.extend(fam_test)
+    def split_train_val_data(data, val_ratio):
+        # Get the total number of elements in the data
+        total_elements = len(data)
+        
+        # Calculate the number of elements for the validation set
+        num_val_elements = int(total_elements * val_ratio)
+        
+        # Shuffle the indices of the data randomly
+        shuffled_indices = list(range(total_elements))
+        random.shuffle(shuffled_indices)
+        
+        # Split the indices into training and validation sets
+        val_indices = shuffled_indices[:num_val_elements]
+        train_indices = shuffled_indices[num_val_elements:]
+        
+        # Create the training and validation sets using the indices
+        train_set = [data[i] for i in train_indices]
+        val_set = [data[i] for i in val_indices]
+        
+        return train_set, val_set
+
+    # Path to the pickle file
+    pickle_file_path = '/home/ec2-user/nas-rec-engine/nas101graphs_partial_total.pkl'
+
+    # Load the pickle file
+    start = time.time()
+    with open(pickle_file_path, 'rb') as file:
+        loaded_data = pickle.load(file)
+        
+        # Get the system's virtual memory information
+    virtual_memory = psutil.virtual_memory()
+
+    # Get the available RAM in bytes
+    available_ram = virtual_memory.available
+
+    # Convert the available RAM to human-readable format
+    available_ram_gb = available_ram / (1024 ** 3)  # Gigabytes
+
+    # Print the available RAM
+    book_keeper.log(f"Available RAM: {available_ram_gb:.2f} GB")
+
+    # Now you can work with the loaded data
+    # For example, print the loaded data
+    book_keeper.log(f"loaded data length: {len(loaded_data)} time - {time.time() - start}")
+
+    train_data, dev_data = split_train_val_data(loaded_data, params.dev_ratio)
+    # for f, (fam_train, fam_dev, fam_test) in family2sets.items():
+    #     train_data.extend(fam_train)
+    #     dev_data.extend(fam_dev)
+    #     test_data.extend(fam_test)
 
     random.shuffle(train_data)
     random.shuffle(dev_data)
-    random.shuffle(test_data)
     book_keeper.log("Train size: {}".format(len(train_data)))
     book_keeper.log("Dev size: {}".format(len(dev_data)))
-    book_keeper.log("Test size: {}".format(len(test_data)))
 
     b_node_size_meter = RunningStatMeter()
-    for g, _ in train_data + dev_data + test_data:
+    for g, _ in train_data + dev_data:
         b_node_size_meter.update(len(g))
     book_keeper.log("Max num nodes: {}".format(b_node_size_meter.max))
     book_keeper.log("Min num nodes: {}".format(b_node_size_meter.min))
@@ -133,14 +174,9 @@ def main(params):
 
     train_loader = CGRegressDataLoader(params.batch_size, train_data)
     dev_loader = CGRegressDataLoader(params.batch_size, dev_data)
-    test_loader = CGRegressDataLoader(params.batch_size, test_data)
 
     book_keeper.log(
         "{} overlap(s) between train/dev loaders".format(train_loader.get_overlapping_data_count(dev_loader)))
-    book_keeper.log(
-        "{} overlap(s) between train/test loaders".format(train_loader.get_overlapping_data_count(test_loader)))
-    book_keeper.log(
-        "{} overlap(s) between dev/test loaders".format(dev_loader.get_overlapping_data_count(test_loader)))
 
     book_keeper.log("Initializing {}".format(params.model_name))
 
@@ -157,7 +193,7 @@ def main(params):
 
     print("checkpoint here")
     # change this lines here
-    model = make_embedding_model(n_unique_labels=len(OP2I().build_from_file()), out_embed_size=params.in_channels,
+    model = make_embedding_model(n_unique_labels=len(OP2I().build_from_file("/home/ec2-user/nas-rec-engine/data/alternative_primitives.txt")), out_embed_size=params.in_channels,
                               shape_embed_size=8, kernel_embed_size=8, n_unique_kernels=8, n_shape_vals=6,
                               hidden_size=params.hidden_size, out_channels=params.out_channels,
                               gnn_constructor=gnn_constructor,
@@ -165,7 +201,7 @@ def main(params):
                               dropout_prob=params.dropout_prob, aggr_method=params.aggr_method,
                               regressor_activ=get_activ_by_name(params.reg_activ)).to(device())
     
-    print("made model")
+    book_keeper.log("made model")
 
     if params.e_chk is not None:
         book_keeper.load_model_checkpoint(model, allow_silent_fail=False, skip_eval_perfs=True,
@@ -203,6 +239,7 @@ def main(params):
                         num_epochs=params.epochs, max_gradient_norm=params.max_gradient_norm, dev_loader=dev_loader)
     except KeyboardInterrupt:
         book_keeper.log("Training interrupted")
+    book_keeper.log("took the following time - ", time.time() - start)
         
 
 if __name__ == "__main__":

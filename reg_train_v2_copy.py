@@ -13,6 +13,8 @@ from model_src.predictor.gpi_family_data_manager import FamilyDataManager
 from model_src.comp_graph.tf_comp_graph_dataloaders import CGRegressDataLoader
 from utils.model_utils import set_random_seed, device, add_weight_decay, get_activ_by_name
 from model_src.predictor.model_perf_predictor import train_predictor, run_predictor_demo, train_embedding_model, train_predictorV2, run_predictor_demoV2
+import pickle
+import psutil
 
 
 """
@@ -23,7 +25,7 @@ For building a generalizable predictor interface
 
 def prepare_local_params(parser, ext_args=None):
     parser.add_argument("-model_name", required=False, type=str,
-                        default="CL_dropout_encoder64_decoder_attn_regression_model101_gmm64")
+                        default="CL_dropout_encoder2x256_decoder_attn_regression_model109_gmm2x256_transform")
     parser.add_argument("-family_train", required=False, type=str,
                         default="nb101"
                         )
@@ -34,11 +36,11 @@ def prepare_local_params(parser, ext_args=None):
     parser.add_argument("-test_ratio", required=False, type=float,
                         default=0.1)
     parser.add_argument("-epochs", required=False, type=int,
-                        default=0)
+                        default=200)
     parser.add_argument("-fine_tune_epochs", required=False, type=int,
                         default=100)
     parser.add_argument("-batch_size", required=False, type=int,
-                        default=16)
+                        default=32)
     parser.add_argument("-initial_lr", required=False, type=float,
                         default=0.00001)
     parser.add_argument("-in_channels", help="", type=int,
@@ -61,7 +63,7 @@ def prepare_local_params(parser, ext_args=None):
                         default="GINConv")
     parser.add_argument("-normalize_HW_per_family", required=False, action="store_true",
                         default=False)
-    parser.add_argument('-e_chk', type=str, default="/home/ec2-user/nas-rec-engine/saved_models/gmm64_seed109_latest_nb101.pt", required=False)
+    parser.add_argument('-e_chk', type=str, default=None, required=False)
     return parser.parse_args(ext_args)
 
 
@@ -88,18 +90,18 @@ def main(params):
                              saved_model_file=params.saved_model_file,
                              logs_dir=params.logs_dir)
 
-    if type(params.family_test) is str:
-        families_train = list(v for v in set(params.family_train.split("+")) if len(v) > 0)
-        families_train.sort()
-        families_test = params.family_test.split("+")
-    else:
-        families_train = params.family_train
-        families_test = params.family_test
+    # if type(params.family_test) is str:
+    #     families_train = list(v for v in set(params.family_train.split("+")) if len(v) > 0)
+    #     families_train.sort()
+    #     families_test = params.family_test.split("+")
+    # else:
+    #     families_train = params.family_train
+    #     families_test = params.family_test
 
-    book_keeper.log("Params: {}".format(params), verbose=False)
-    set_random_seed(params.seed, log_f=book_keeper.log)
-    book_keeper.log("Train Families: {}".format(families_train))
-    book_keeper.log("Test Families: {}".format(families_test))
+    # book_keeper.log("Params: {}".format(params), verbose=False)
+    # set_random_seed(params.seed, log_f=book_keeper.log)
+    # book_keeper.log("Train Families: {}".format(families_train))
+    # book_keeper.log("Test Families: {}".format(families_test))
     
     if "GINConv" in params.gnn_type:
         def gnn_constructor(in_channels, out_channels):
@@ -112,7 +114,7 @@ def main(params):
             return eval("torch_geometric.nn.%s(%d, %d)"
                         % (params.gnn_type, in_channels, out_channels))
     
-    model = make_embedding_regressor_modelV2(n_unique_labels=len(OP2I().build_from_file()), out_embed_size=params.in_channels,
+    model = make_embedding_regressor_modelV2(n_unique_labels=len(OP2I().build_from_file("/home/ec2-user/nas-rec-engine/data/alternative_primitives.txt")), out_embed_size=params.in_channels,
                               shape_embed_size=8, kernel_embed_size=8, n_unique_kernels=8, n_shape_vals=6,
                               hidden_size=params.hidden_size, out_channels=params.out_channels,
                               gnn_constructor=gnn_constructor,
@@ -120,10 +122,11 @@ def main(params):
                               dropout_prob=params.dropout_prob, aggr_method=params.aggr_method,
                               regressor_activ=get_activ_by_name(params.reg_activ)).to(device())
 
-    # encoder_checkpoint = "/home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder64_decoder_model_new_loss_seed109_best.pt"
-    # book_keeper.load_model_checkpoint(model.graph_encoder, allow_silent_fail=False, skip_eval_perfs=True,
-    #                                        checkpoint_file=encoder_checkpoint)
-    # book_keeper.log("Loaded checkpoint: {}".format(encoder_checkpoint))
+    encoder_checkpoint = "/home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder2x256_seed109_best.pt"
+    book_keeper.load_model_checkpoint(model.graph_encoder, allow_silent_fail=False, skip_eval_perfs=True,
+                                           checkpoint_file=encoder_checkpoint)
+    book_keeper.log("Loaded checkpoint: {}".format(encoder_checkpoint))
+    
     model.graph_encoder.eval()
     if params.e_chk is not None:
         book_keeper.load_model_checkpoint(model, allow_silent_fail=False, skip_eval_perfs=True,
@@ -131,18 +134,74 @@ def main(params):
         book_keeper.log("Loaded checkpoint: {}".format(params.e_chk))
         
         
-    families_test = get_family_train_size_dict(families_test)
-    data_manager = FamilyDataManager(families_train, log_f=book_keeper.log)
-    family2sets = \
-        data_manager.get_regress_train_dev_test_sets(params.dev_ratio, params.test_ratio,
-                                                     normalize_HW_per_family=params.normalize_HW_per_family,
-                                                     normalize_target=False, group_by_family=True)
+    # families_test = get_family_train_size_dict(families_test)
+    # data_manager = FamilyDataManager(families_train, log_f=book_keeper.log)
+    # family2sets = \
+    #     data_manager.get_regress_train_dev_test_sets(params.dev_ratio, params.test_ratio,
+    #                                                  normalize_HW_per_family=params.normalize_HW_per_family,
+    #                                                  normalize_target=False, group_by_family=True)
+
+
+    book_keeper.log("Loading data")
+    def split_train_val_test_data(data, val_ratio, test_ratio, random_seed=None):
+        # Set the random seed if provided
+        if random_seed is not None:
+            random.seed(random_seed)
+        
+        # Get the total number of elements in the data
+        total_elements = len(data)
+        
+        # Calculate the number of elements for the validation and test sets
+        num_val_elements = int(total_elements * val_ratio)
+        num_test_elements = int(total_elements * test_ratio)
+        
+        # Shuffle the indices of the data randomly
+        shuffled_indices = list(range(total_elements))
+        random.shuffle(shuffled_indices)
+        
+        # Split the indices into training, validation, and test sets
+        val_indices = shuffled_indices[:num_val_elements]
+        test_indices = shuffled_indices[num_val_elements:num_val_elements+num_test_elements]
+        train_indices = shuffled_indices[num_val_elements+num_test_elements:]
+        
+        # Create the training, validation, and test sets using the indices
+        train_set = [data[i] for i in train_indices]
+        val_set = [data[i] for i in val_indices]
+        test_set = [data[i] for i in test_indices]
+        
+        return train_set, val_set, test_set
+
 
     train_data, dev_data, test_data = [], [], []
-    for f, (fam_train, fam_dev, fam_test) in family2sets.items():
-        train_data.extend(fam_train)
-        dev_data.extend(fam_dev)
-        test_data.extend(fam_test)
+    # Path to the pickle file
+    pickle_file_path = '/home/ec2-user/nas-rec-engine/nas101graphs_partial_total.pkl'
+
+    # Load the pickle file
+    start = time.time()
+    with open(pickle_file_path, 'rb') as file:
+        loaded_data = pickle.load(file)
+        
+        # Get the system's virtual memory information
+    virtual_memory = psutil.virtual_memory()
+
+    # Get the available RAM in bytes
+    available_ram = virtual_memory.available
+
+    # Convert the available RAM to human-readable format
+    available_ram_gb = available_ram / (1024 ** 3)  # Gigabytes
+
+    # Print the available RAM
+    book_keeper.log(f"Available RAM: {available_ram_gb:.2f} GB")
+
+    # Now you can work with the loaded data
+    # For example, print the loaded data
+    book_keeper.log(f"loaded data length: {len(loaded_data)} time - {time.time() - start}")
+
+    train_data, dev_data, test_data = split_train_val_test_data(loaded_data, params.dev_ratio, params.test_ratio, random_seed=109)
+    # for f, (fam_train, fam_dev, fam_test) in family2sets.items():
+    #     train_data.extend(fam_train)
+    #     dev_data.extend(fam_dev)
+    #     test_data.extend(fam_test)
 
     random.shuffle(train_data)
     random.shuffle(dev_data)
@@ -174,8 +233,8 @@ def main(params):
     perf_criterion = torch.nn.MSELoss()
     model_params = list(model.aggregator.parameters()) + \
                     list(model.regressor.parameters())
-    model_params = add_weight_decay(model, weight_decay=1e-3)
-    optimizer = torch.optim.Adam(model_params, lr=params.initial_lr, weight_decay=1e-3)
+    model_params = add_weight_decay(model)
+    optimizer = torch.optim.Adam(model_params, lr=params.initial_lr)
 
 
     book_keeper.log(model)
@@ -239,90 +298,90 @@ def main(params):
         book_keeper.log("Total time: %s" % (end - start))
         results_list = [overall_sp_rho]
 
-    foreign_families = tuple(families_test.keys())
-    book_keeper.log("Starting fine-tune on foreign families: {}".format(foreign_families))
+    # foreign_families = tuple(families_test.keys())
+    # book_keeper.log("Starting fine-tune on foreign families: {}".format(foreign_families))
 
-    ff_manager = FamilyDataManager(families=foreign_families, log_f=book_keeper.log)
-    ff_data = ff_manager.get_regress_train_dev_test_sets(0, 1.0,
-                                                         group_by_family=True,
-                                                         normalize_HW_per_family=params.normalize_HW_per_family,
-                                                         normalize_target=False)
+    # ff_manager = FamilyDataManager(families=foreign_families, log_f=book_keeper.log)
+    # ff_data = ff_manager.get_regress_train_dev_test_sets(0, 1.0,
+    #                                                      group_by_family=True,
+    #                                                      normalize_HW_per_family=params.normalize_HW_per_family,
+    #                                                      normalize_target=False)
 
-    for family, size in families_test.items():
-        # For test families, merge test and validation partitions into one.
-        book_keeper.log("Merging all data into test set for family {}".format(family))
-        foreign_data = ff_data[family][-1] + ff_data[family][-2]
+    # for family, size in families_test.items():
+    #     # For test families, merge test and validation partitions into one.
+    #     book_keeper.log("Merging all data into test set for family {}".format(family))
+    #     foreign_data = ff_data[family][-1] + ff_data[family][-2]
 
-        foreign_data.sort(key=lambda x: x[1], reverse=True)
+    #     foreign_data.sort(key=lambda x: x[1], reverse=True)
 
-        ft_shuffle_inds = list(range(len(foreign_data)))
-        np.random.seed(params.seed)
-        np.random.shuffle(ft_shuffle_inds)
-        foreign_data = [foreign_data[i] for i in ft_shuffle_inds]
-        fine_tune_data = foreign_data[:size]
-        foreign_test_data = foreign_data[size:]
+    #     ft_shuffle_inds = list(range(len(foreign_data)))
+    #     np.random.seed(params.seed)
+    #     np.random.shuffle(ft_shuffle_inds)
+    #     foreign_data = [foreign_data[i] for i in ft_shuffle_inds]
+    #     fine_tune_data = foreign_data[:size]
+    #     foreign_test_data = foreign_data[size:]
 
-        book_keeper.log("Foreign family {} fine-tune size: {}".format(family, len(fine_tune_data)))
-        book_keeper.log("Foreign family {} test size: {}".format(family, len(foreign_test_data)))
-        foreign_test_loader = CGRegressDataLoader(1, foreign_test_data)
+    #     book_keeper.log("Foreign family {} fine-tune size: {}".format(family, len(fine_tune_data)))
+    #     book_keeper.log("Foreign family {} test size: {}".format(family, len(foreign_test_data)))
+    #     foreign_test_loader = CGRegressDataLoader(1, foreign_test_data)
 
-        if len(fine_tune_data) > 0:
+    #     if len(fine_tune_data) > 0:
 
-            ft_model = copy.deepcopy(model)
-            ft_model_params = list(ft_model.aggregator.parameters()) + \
-                    list(ft_model.regressor.parameters())
-            ft_opt = torch.optim.Adam(ft_model_params, lr=params.initial_lr)
+    #         ft_model = copy.deepcopy(model)
+    #         ft_model_params = list(ft_model.aggregator.parameters()) + \
+    #                 list(ft_model.regressor.parameters())
+    #         ft_opt = torch.optim.Adam(ft_model_params, lr=params.initial_lr)
 
-            ft_loader = CGRegressDataLoader(1, fine_tune_data)
+    #         ft_loader = CGRegressDataLoader(1, fine_tune_data)
 
-            book_keeper.log("Fine-tuning for {} epochs".format(params.fine_tune_epochs))
-            train_predictorV2(_batch_fwd_func, ft_model, ft_loader, perf_criterion, ft_opt, book_keeper,
-                            num_epochs=params.fine_tune_epochs, max_gradient_norm=params.max_gradient_norm,
-                            dev_loader=None, checkpoint=False)
+    #         book_keeper.log("Fine-tuning for {} epochs".format(params.fine_tune_epochs))
+    #         train_predictorV2(_batch_fwd_func, ft_model, ft_loader, perf_criterion, ft_opt, book_keeper,
+    #                         num_epochs=params.fine_tune_epochs, max_gradient_norm=params.max_gradient_norm,
+    #                         dev_loader=None, checkpoint=False)
 
-        with torch.no_grad():
-            model.eval()
-            foreign_labels, foreign_preds = get_reg_truth_and_predsV2(model, foreign_test_loader, _batch_fwd_func)
-            test_reg_metrics = pure_regressor_metrics(foreign_labels, foreign_preds)
-            for i, metric in enumerate(reg_metrics):
-                book_keeper.log("{}-NoFT {}: {}".format(family, metric, test_reg_metrics[i]))
+    #     with torch.no_grad():
+    #         model.eval()
+    #         foreign_labels, foreign_preds = get_reg_truth_and_predsV2(model, foreign_test_loader, _batch_fwd_func)
+    #         test_reg_metrics = pure_regressor_metrics(foreign_labels, foreign_preds)
+    #         for i, metric in enumerate(reg_metrics):
+    #             book_keeper.log("{}-NoFT {}: {}".format(family, metric, test_reg_metrics[i]))
 
-            no_ft_sp = correlation_metrics(foreign_labels, foreign_preds)[0]
-            book_keeper.log("{}-NoFT Spearman Rho: {}".format(family, no_ft_sp))
+    #         no_ft_sp = correlation_metrics(foreign_labels, foreign_preds)[0]
+    #         book_keeper.log("{}-NoFT Spearman Rho: {}".format(family, no_ft_sp))
 
-            test_kt_metrics = kendall_with_filts(foreign_labels, foreign_preds, filters=kt_threshs)
-            for i, filt in enumerate(kt_threshs):
-                book_keeper.log("{}-NoFT KT{}: {}".format(family, filt, test_kt_metrics[i]))
+    #         test_kt_metrics = kendall_with_filts(foreign_labels, foreign_preds, filters=kt_threshs)
+    #         for i, filt in enumerate(kt_threshs):
+    #             book_keeper.log("{}-NoFT KT{}: {}".format(family, filt, test_kt_metrics[i]))
 
-            test_ndcg_metrics = ndcg(foreign_labels, foreign_preds, k_list=ndcg_ks)
-            for i, k in enumerate(ndcg_ks):
-                book_keeper.log("{}-NoFT NDCG@{}: {}".format(family, k, test_ndcg_metrics[i]))
+    #         test_ndcg_metrics = ndcg(foreign_labels, foreign_preds, k_list=ndcg_ks)
+    #         for i, k in enumerate(ndcg_ks):
+    #             book_keeper.log("{}-NoFT NDCG@{}: {}".format(family, k, test_ndcg_metrics[i]))
 
-            book_keeper.log("Total time: %s" % (end - start))
+    #         book_keeper.log("Total time: %s" % (end - start))
 
-            results_list.append(no_ft_sp)
+    #         results_list.append(no_ft_sp)
 
-            if len(fine_tune_data) > 0:
-                book_keeper.checkpoint_model("_{}_ft.pt".format(family), params.fine_tune_epochs,
-                                             ft_model, ft_opt)
+    #         if len(fine_tune_data) > 0:
+    #             book_keeper.checkpoint_model("_{}_ft.pt".format(family), params.fine_tune_epochs,
+    #                                          ft_model, ft_opt)
 
-                foreign_labels, foreign_preds = get_reg_truth_and_predsV2(ft_model, foreign_test_loader, _batch_fwd_func)
-                test_reg_metrics = pure_regressor_metrics(foreign_labels, foreign_preds)
-                for i, metric in enumerate(reg_metrics):
-                    book_keeper.log("{}-FT {}: {}".format(family, metric, test_reg_metrics[i]))
+    #             foreign_labels, foreign_preds = get_reg_truth_and_predsV2(ft_model, foreign_test_loader, _batch_fwd_func)
+    #             test_reg_metrics = pure_regressor_metrics(foreign_labels, foreign_preds)
+    #             for i, metric in enumerate(reg_metrics):
+    #                 book_keeper.log("{}-FT {}: {}".format(family, metric, test_reg_metrics[i]))
 
-                ft_sp = correlation_metrics(foreign_labels, foreign_preds)[0]
-                book_keeper.log("{}-FT Spearman Rho: {}".format(family, ft_sp))
+    #             ft_sp = correlation_metrics(foreign_labels, foreign_preds)[0]
+    #             book_keeper.log("{}-FT Spearman Rho: {}".format(family, ft_sp))
 
-                test_kt_metrics = kendall_with_filts(foreign_labels, foreign_preds, filters=kt_threshs)
-                for i, filt in enumerate(kt_threshs):
-                    book_keeper.log("{}-FT KT{}: {}".format(family, filt, test_kt_metrics[i]))
+    #             test_kt_metrics = kendall_with_filts(foreign_labels, foreign_preds, filters=kt_threshs)
+    #             for i, filt in enumerate(kt_threshs):
+    #                 book_keeper.log("{}-FT KT{}: {}".format(family, filt, test_kt_metrics[i]))
 
-                test_ndcg_metrics = ndcg(foreign_labels, foreign_preds, k_list=ndcg_ks)
-                for i, k in enumerate(ndcg_ks):
-                    book_keeper.log("{}-FT NDCG@{}: {}".format(family, k, test_ndcg_metrics[i]))
+    #             test_ndcg_metrics = ndcg(foreign_labels, foreign_preds, k_list=ndcg_ks)
+    #             for i, k in enumerate(ndcg_ks):
+    #                 book_keeper.log("{}-FT NDCG@{}: {}".format(family, k, test_ndcg_metrics[i]))
 
-                results_list.append(ft_sp)
+    #             results_list.append(ft_sp)
 
 
 if __name__ == "__main__":

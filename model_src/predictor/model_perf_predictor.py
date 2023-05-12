@@ -62,11 +62,17 @@ class SimCLRLoss(torch.nn.Module):
         
     def graph_to_eigen(self, e, q=21):
         laplace_matrix = get_laplacian(e)
-        adj = to_dense_adj(laplace_matrix[0], edge_attr=laplace_matrix[1])
+        adj = to_dense_adj(laplace_matrix[0], edge_attr=laplace_matrix[1]).cuda()
         norm_adj = torch.nn.functional.normalize(adj)
         eigenvalues = torch.linalg.eigvals(norm_adj)
         values, indices = torch.sort(eigenvalues.to(torch.float64))
-        return values.view(-1)[:q]
+        final_tensor = values.view(-1)[:q]
+        if len(final_tensor) != 21:
+            zeros_tensor = torch.zeros(self.q - len(eigenvalues[0]), dtype=eigenvalues.dtype).cuda()
+            final_tensor = torch.cat((zeros_tensor, final_tensor), dim=0)
+            assert len(final_tensor) == 21
+            
+        return final_tensor
     
     def forward(self, x, edges):
         """
@@ -138,14 +144,14 @@ def run_embedding_epoch(batch_fwd_func, model, loader, criterion, optimizer, boo
     total_loss, n_instances = 0., 0
     metrics_dict = collections.defaultdict(float)
     preds, targets = [], []
-    temperature = 0.3*(1.05 - (curr_epoch/num_epochs))
+    temperature = 0.05
     if desc != "Train":
         temperature = 0.05
     for batch in tqdm(loader, desc=desc, ascii=True):
         embed, node_embed, decoder_node_embed = batch_fwd_func(model, batch)
-        reg_loss = SimCLRLossV2(temperature)(embed, batch[DK_BATCH_TARGET_TSR])
+        #reg_loss = SimCLRLossV2(temperature)(embed, batch[DK_BATCH_TARGET_TSR])
         cos_loss = (1 - torch.nn.functional.cosine_similarity(node_embed, decoder_node_embed)).mean()
-        loss = SimCLRLoss(temperature)(embed, batch[DK_BATCH_EDGE_TSR_LIST]) + cos_loss + reg_loss
+        loss = SimCLRLoss(temperature)(embed, batch[DK_BATCH_EDGE_TSR_LIST]) + cos_loss #+ reg_loss
         
         total_loss += loss.item() * batch[DK_BATCH_SIZE]
         if optimizer is not None:
@@ -248,6 +254,7 @@ def train_predictorV2(batch_fwd_func, model, train_loader, criterion, optimizer,
     for epoch in range(num_epochs):
         report_epoch = epoch + completed_epochs + 1
         model.train()
+        model.graph_encoder.eval()
         train_score = run_predictor_epochV2(batch_fwd_func, model, train_loader, criterion, optimizer, book_keeper,
                                           rv_metric_name=rv_metric_name, max_grad_norm=max_gradient_norm,
                                           curr_epoch=report_epoch)
@@ -284,10 +291,15 @@ def run_predictor_epochV2(batch_fwd_func, model, loader, criterion, optimizer, b
         batch_vals = batch_fwd_func(model, batch)
         truth = batch[DK_BATCH_TARGET_TSR].to(device())
         pred = batch_vals.squeeze(1)
-        loss = criterion(pred, truth)
+        truth_mean = 8459761.888077635
+        truth_std = 8558492.52118353
+        truth[:,1] = (truth[:,1] - truth_mean) / truth_std
+        transformed_truth = truth[:,0] * truth[:,1]
+        loss = criterion(pred, transformed_truth)
+        pred_acc = pred / truth[:,1]
         total_loss += loss.item() * batch[DK_BATCH_SIZE]
-        preds.extend(pred.detach().tolist())
-        targets.extend(truth.detach().tolist())
+        preds.extend(pred_acc.detach().tolist())
+        targets.extend(truth[:,0].detach().tolist())
         if optimizer is not None:
             optimizer.zero_grad()
             loss.backward()

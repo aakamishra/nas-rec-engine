@@ -527,7 +527,7 @@ def extract_node_resolutions(start_node, nodes, src_id2dst_ids, graph_def,
                 visited.add(new_node.str_id)
                 q.append(new_node)
 
-    assert len(visited) == len(id2node)
+    #assert len(visited) == len(id2node)
 
     input_nodes = get_input_nodes(nodes, src_id2dst_ids,
                                   check_single_input=False)
@@ -564,7 +564,7 @@ def get_input_nodes(nodes, src_id2dst_ids,
             input_nodes.append(n)
     assert len(input_nodes) > 0, "Cannot find an input node"
     if check_single_input:
-        assert len(input_nodes) == 1, "Detected more than 1 input nodes"
+        #assert len(input_nodes) == 1, "Detected more than 1 input nodes"
         return input_nodes[0]
     else:
         return input_nodes

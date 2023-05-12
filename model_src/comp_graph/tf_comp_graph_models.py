@@ -142,7 +142,7 @@ class ClusterSpecificNet(torch.nn.Module):
             torch.nn.Linear(hidden_size, hidden_size),
             torch.nn.ReLU(),
             torch.nn.Linear(hidden_size, 2*hidden_size),
-            torch.nn.Dropout(0.1),
+            torch.nn.Dropout(0.2),
             torch.nn.ReLU(),
             torch.nn.Linear(2*hidden_size, hidden_size),
             torch.nn.ReLU(),
@@ -299,7 +299,7 @@ class AggregateCGRegressorV2(torch.nn.Module):
         self.aggregator = aggregator
         self.activ = activ
         
-        self.gmm = load_gmm("nas_assignment_model1")
+        self.gmm = load_gmm("nas_assignment_model_2x256")
         
         self.regressor = ClusterSpecificNet(32, hidden_size, hidden_size=hidden_size*2, output_size=hidden_size)
         
