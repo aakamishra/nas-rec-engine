@@ -107,6 +107,7 @@ class CGRegressDataLoader:
                                              weighted_node_bias,
                                              edge_list_to_edge_pairs(edge_list), strategy="simple")
                     batch_unique_str_id_set.add(graph_id)
+                batch_tgt = [(batch[0], batch[1]) for batch in batch_tgt]
                 batch_tgt = torch.FloatTensor(batch_tgt)
                 if len(batch_regular_inds) > 0:
                     batch_regular_inds = torch.cat(batch_regular_inds, dim=0)

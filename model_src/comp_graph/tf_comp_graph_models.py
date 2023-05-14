@@ -135,31 +135,32 @@ class ClusterSpecificNet(torch.nn.Module):
         super(ClusterSpecificNet, self).__init__()
 
         # Define the weights for each cluster
-        self.cluster_weights = torch.nn.Parameter(torch.randn(num_clusters, input_size, hidden_size))
-        self.cluster_bias = torch.nn.Parameter(torch.randn(num_clusters, hidden_size))
+        self.cluster_weights = torch.nn.Parameter(torch.randn(num_clusters, input_size, hidden_size//2))
+        self.cluster_bias = torch.nn.Parameter(torch.randn(num_clusters, hidden_size//2))
         
         self.proj = torch.nn.Sequential(
-            torch.nn.Linear(hidden_size, hidden_size),
+            torch.nn.Linear(hidden_size, 4*hidden_size),
             torch.nn.ReLU(),
-            torch.nn.Linear(hidden_size, 2*hidden_size),
-            torch.nn.Dropout(0.2),
+            torch.nn.Linear(4*hidden_size, 6*hidden_size),
+            torch.nn.Dropout(0.15),
             torch.nn.ReLU(),
-            torch.nn.Linear(2*hidden_size, hidden_size),
+            torch.nn.Linear(6*hidden_size, 4*hidden_size),
             torch.nn.ReLU(),
-            torch.nn.Dropout(0.2),
-            torch.nn.Linear(hidden_size, hidden_size),
+            torch.nn.Dropout(0.3),
+            torch.nn.Linear(4*hidden_size, 2*hidden_size),
         )
         
-        self.regressor = torch.nn.Linear(hidden_size, 1)
+        self.regressor = torch.nn.Linear(2*hidden_size, 1)
 
     def forward(self, x, soft_label):
         
+        input_tensor = x
         w = torch.sum(soft_label.unsqueeze(-1).unsqueeze(-1) * self.cluster_weights, dim=0)
         b = torch.sum(soft_label.unsqueeze(-1) * self.cluster_bias, dim=0)
 
         # Compute the output using the weighted sum of the cluster weights and biases
         x = torch.nn.functional.relu(torch.matmul(x.double(), w.permute(2,1,0)).permute(1, 2, 0) + b)
-        x = self.proj(torch.mean(x, dim=1).float())
+        x = self.proj(torch.cat([torch.mean(x, dim=1).float(), input_tensor], dim=1))
         return self.regressor(x)
     
 class GraphAutoEncoder(torch.nn.Module):

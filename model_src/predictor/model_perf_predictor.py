@@ -291,14 +291,15 @@ def run_predictor_epochV2(batch_fwd_func, model, loader, criterion, optimizer, b
         batch_vals = batch_fwd_func(model, batch)
         truth = batch[DK_BATCH_TARGET_TSR].to(device())
         pred = batch_vals.squeeze(1)
-        truth_mean = 8459761.888077635
-        truth_std = 8558492.52118353
-        truth[:,1] = (truth[:,1] - truth_mean) / truth_std
-        transformed_truth = truth[:,0] * truth[:,1]
-        loss = criterion(pred, transformed_truth)
-        pred_acc = pred / truth[:,1]
+        truth_mean = 0.090877354
+        truth_std = 0.0058429195
+        
+        transformed_truth = truth[:, 0] / (torch.log10(truth[:,1] + 1) + 1)
+        transformed_truth_standardized = (transformed_truth - truth_mean) / truth_std
+        loss = criterion(pred, transformed_truth_standardized)
+        pred_actual = ((pred * truth_std) + truth_mean) * (torch.log10(truth[:,1] + 1) + 1)
         total_loss += loss.item() * batch[DK_BATCH_SIZE]
-        preds.extend(pred_acc.detach().tolist())
+        preds.extend(pred_actual.detach().tolist())
         targets.extend(truth[:,0].detach().tolist())
         if optimizer is not None:
             optimizer.zero_grad()

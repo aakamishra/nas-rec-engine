@@ -25,7 +25,7 @@ For building a generalizable predictor interface
 
 def prepare_local_params(parser, ext_args=None):
     parser.add_argument("-model_name", required=False, type=str,
-                        default="CL_dropout_encoder2x256_decoder_attn_regression_model109_gmm2x256_transform")
+                        default="CL_dropout_encoder2x256_decoder_attn_regression_model109_gmm2x256_transformed_flops_giant_unlocked_v2")
     parser.add_argument("-family_train", required=False, type=str,
                         default="nb101"
                         )
@@ -42,7 +42,7 @@ def prepare_local_params(parser, ext_args=None):
     parser.add_argument("-batch_size", required=False, type=int,
                         default=32)
     parser.add_argument("-initial_lr", required=False, type=float,
-                        default=0.00001)
+                        default=0.00005)
     parser.add_argument("-in_channels", help="", type=int,
                         default=256, required=False)
     parser.add_argument("-hidden_size", help="", type=int,
@@ -52,7 +52,7 @@ def prepare_local_params(parser, ext_args=None):
     parser.add_argument("-num_layers", help="", type=int,
                         default=6, required=False)
     parser.add_argument("-dropout_prob", help="", type=float,
-                        default=0.1, required=False)
+                        default=0.2, required=False)
     parser.add_argument("-aggr_method", required=False, type=str,
                         default="mean")
     parser.add_argument("-gnn_activ", required=False, type=str,
@@ -63,7 +63,7 @@ def prepare_local_params(parser, ext_args=None):
                         default="GINConv")
     parser.add_argument("-normalize_HW_per_family", required=False, action="store_true",
                         default=False)
-    parser.add_argument('-e_chk', type=str, default=None, required=False)
+    parser.add_argument('-e_chk', type=str, default="/home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder2x256_decoder_attn_regression_model109_gmm2x256_transformed_flops_giant_seed109_latest.pt", required=False)
     return parser.parse_args(ext_args)
 
 
@@ -122,10 +122,10 @@ def main(params):
                               dropout_prob=params.dropout_prob, aggr_method=params.aggr_method,
                               regressor_activ=get_activ_by_name(params.reg_activ)).to(device())
 
-    encoder_checkpoint = "/home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder2x256_seed109_best.pt"
-    book_keeper.load_model_checkpoint(model.graph_encoder, allow_silent_fail=False, skip_eval_perfs=True,
-                                           checkpoint_file=encoder_checkpoint)
-    book_keeper.log("Loaded checkpoint: {}".format(encoder_checkpoint))
+    # encoder_checkpoint = "/home/ec2-user/nas-rec-engine/saved_models/gpi_acc_predictor_CL_dropout_encoder2x256_seed109_best.pt"
+    # book_keeper.load_model_checkpoint(model.graph_encoder, allow_silent_fail=False, skip_eval_perfs=True,
+    #                                        checkpoint_file=encoder_checkpoint)
+    # book_keeper.log("Loaded checkpoint: {}".format(encoder_checkpoint))
     
     model.graph_encoder.eval()
     if params.e_chk is not None:
@@ -174,7 +174,7 @@ def main(params):
 
     train_data, dev_data, test_data = [], [], []
     # Path to the pickle file
-    pickle_file_path = '/home/ec2-user/nas-rec-engine/nas101graphs_partial_total.pkl'
+    pickle_file_path = '/home/ec2-user/nas-rec-engine/nas101graphs_medium.pkl'
 
     # Load the pickle file
     start = time.time()
@@ -231,8 +231,9 @@ def main(params):
     book_keeper.log("Initializing {}".format(params.model_name))
 
     perf_criterion = torch.nn.MSELoss()
-    model_params = list(model.aggregator.parameters()) + \
-                    list(model.regressor.parameters())
+    # model_params = list(model.aggregator.parameters()) + \
+    #                 list(model.regressor.parameters())
+    model_params = list(model.parameters())
     model_params = add_weight_decay(model)
     optimizer = torch.optim.Adam(model_params, lr=params.initial_lr)
 

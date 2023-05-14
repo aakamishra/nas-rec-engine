@@ -8,11 +8,17 @@ from nasbench import api
 import nasbench1
 import nasbench1_spec
 import pickle
+import numpy as np
+import random
+from ptflops import get_model_complexity_info
+
+
 
 def run():
     i = 0
     j = 0
     data = []
+    flops_data = []
     
     dataset_path = '/home/ec2-user/nasbench_full.tfrecord'
     # Use nasbench_full.tfrecord for full dataset (run download command above).
@@ -20,10 +26,14 @@ def run():
     print("loaded")
     
     op2i = OP2I().build_from_file("/home/ec2-user/nas-rec-engine/data/alternative_primitives.txt")
-    for hash in tqdm(nasbench.hash_iterator()):
-        if i < 200001:
-            i += 1
-            continue
+    hash_list = [hash for hash in tqdm(nasbench.hash_iterator())]
+    all_indices = range(len(hash_list))  # Example range of indices from 1 to 5000
+
+    # Randomly select 2100 indices
+    random_indices = random.sample(all_indices, 2500)
+
+    for idx in tqdm(random_indices):
+        hash = hash_list[idx]
         info = nasbench.get_metrics_from_hash(hash)
         matrix = info[0]['module_adjacency']
         ops = info[0]['module_operations']
@@ -33,7 +43,8 @@ def run():
         # create pytorch network
         spec = nasbench1_spec._ToModelSpec(matrix, ops)
         net = nasbench1.Network(spec, stem_out=128, num_stacks=3, num_mods=3, num_classes=10)
-        
+        macs, _ = get_model_complexity_info(net, (3, 32, 32), as_strings=False)
+        flops_data.append(macs)
         # create dot graph
         model_graph = draw_graph(
             net, input_size=(1,3,32,32),
@@ -44,16 +55,12 @@ def run():
         
         new_cg = process_graph(model_graph, op2i, i)
         #print("finished ", i, new_cg)
-        data.append((new_cg,(acc, params)))
-        
-        if i % 50000 == 0:
-            with open(f"nas101graphs{j}-{i}.pkl", 'wb') as f:
-                pickle.dump(data[j:i], f)
-            j = i
-            
+        data.append((new_cg, (acc, macs, hash)))
+
     
-    with open(f"nas101graphs{i}.pkl", 'wb') as f:
+    with open(f"nas101graphs_tiny.pkl", 'wb') as f:
         pickle.dump(data, f)
+    print("flops mean: ", np.mean(flops_data), " std: ", np.std(flops_data))
     
 def process_graph(model_graph: ComputationGraph, op2i, i):
     regular_nodes, weighted_nodes = [], []
